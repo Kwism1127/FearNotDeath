@@ -1,0 +1,53 @@
+[gd_scene load_steps=4 format=3 uid="uid://c5unkrxf8u18p"]
+
+[ext_resource type="Texture2D" uid="uid://41tvq47kla0v" path="res://Assets/ranger_card_base.png" id="1_7m7sd"]
+[ext_resource type="Script" path="res://Scripts/card.gd" id="1_rxrsf"]
+[ext_resource type="Texture2D" uid="uid://drngv8orhpi1x" path="res://Assets/poise_cost_icon.png" id="2_3gm3e"]
+
+[node name="Card" type="Node2D"]
+position = Vector2(316, 178)
+script = ExtResource("1_rxrsf")
+
+[node name="CardBase" type="Node2D" parent="."]
+
+[node name="BaseSpr" type="Sprite2D" parent="CardBase"]
+texture = ExtResource("1_7m7sd")
+
+[node name="CardImage" type="Node2D" parent="."]
+
+[node name="ImageSpr" type="Sprite2D" parent="CardImage"]
+
+[node name="CardName" type="Node2D" parent="."]
+
+[node name="NameLbl" type="Label" parent="CardName"]
+offset_left = -75.0
+offset_top = -117.0
+offset_right = -22.0
+offset_bottom = -94.0
+text = "Strike"
+metadata/_edit_use_anchors_ = true
+
+[node name="CardCost" type="Node2D" parent="."]
+
+[node name="CostLbl" type="Label" parent="CardCost"]
+offset_left = 40.0
+offset_top = -120.0
+offset_right = 80.0
+offset_bottom = -97.0
+text = "1"
+metadata/_edit_use_anchors_ = true
+
+[node name="CostSpr" type="Sprite2D" parent="CardCost"]
+position = Vector2(66, -108)
+texture = ExtResource("2_3gm3e")
+
+[node name="CardDescription" type="Node2D" parent="."]
+
+[node name="DescriptionLbl" type="Label" parent="CardDescription"]
+offset_left = -71.0
+offset_top = 8.0
+offset_right = 45.0
+offset_bottom = 31.0
+text = "Deal 1 Damage"
+autowrap_mode = 2
+metadata/_edit_use_anchors_ = true
