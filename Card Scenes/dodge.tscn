@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://bwatsw021t8ne"]
+
+[ext_resource type="PackedScene" uid="uid://c5unkrxf8u18p" path="res://card.tscn" id="1_6kq71"]
+
+[node name="Dodge" type="Node2D"]
+
+[node name="Card" parent="." instance=ExtResource("1_6kq71")]
+card_name = "Dodge"
+card_description = "Regain 3 poise"
+card_cost = 0

@@ -5,7 +5,6 @@
 [ext_resource type="Texture2D" uid="uid://drngv8orhpi1x" path="res://Assets/poise_cost_icon.png" id="2_3gm3e"]
 
 [node name="Card" type="Node2D"]
-position = Vector2(316, 178)
 script = ExtResource("1_rxrsf")
 
 [node name="CardBase" type="Node2D" parent="."]
