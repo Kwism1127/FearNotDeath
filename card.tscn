@@ -1,24 +1,31 @@
-[gd_scene load_steps=5 format=3 uid="uid://c5unkrxf8u18p"]
+[gd_scene load_steps=6 format=3 uid="uid://c5unkrxf8u18p"]
 
-[ext_resource type="Texture2D" uid="uid://41tvq47kla0v" path="res://Assets/ranger_card_base.png" id="1_7m7sd"]
 [ext_resource type="Script" path="res://Scripts/card.gd" id="1_rxrsf"]
-[ext_resource type="Texture2D" uid="uid://drngv8orhpi1x" path="res://Assets/poise_cost_icon.png" id="2_3gm3e"]
-[ext_resource type="Texture2D" uid="uid://bedleecnra4hf" path="res://Assets/strike_art.png" id="3_435t7"]
+[ext_resource type="Texture2D" uid="uid://drngv8orhpi1x" path="res://Assets/poise_cost_icon.png" id="2_x8s1q"]
+[ext_resource type="Texture2D" uid="uid://bedleecnra4hf" path="res://Assets/strike_art.png" id="3_l7kyo"]
+[ext_resource type="Texture2D" uid="uid://ckhrm1kakgtag" path="res://Assets/duelist_card_base.png" id="4_ab54u"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_cwoxu"]
+size = Vector2(161, 234)
 
 [node name="Card" type="Node2D"]
 script = ExtResource("1_rxrsf")
-card_name = ""
-card_description = ""
+card_name = "Card"
+card_description = "This is a card"
+card_cost = 3
+card_cost_resource = ExtResource("2_x8s1q")
+card_image = ExtResource("3_l7kyo")
+card_background = ExtResource("4_ab54u")
 
 [node name="CardBase" type="Node2D" parent="."]
 
 [node name="BaseSpr" type="Sprite2D" parent="CardBase"]
-texture = ExtResource("1_7m7sd")
+texture = ExtResource("4_ab54u")
 
 [node name="CardImage" type="Node2D" parent="."]
 
 [node name="ImageSpr" type="Sprite2D" parent="CardImage"]
-texture = ExtResource("3_435t7")
+texture = ExtResource("3_l7kyo")
 
 [node name="CardName" type="Node2D" parent="."]
 
@@ -27,7 +34,7 @@ offset_left = -75.0
 offset_top = -117.0
 offset_right = -22.0
 offset_bottom = -94.0
-text = "Strike"
+text = "Card"
 metadata/_edit_use_anchors_ = true
 
 [node name="CardCost" type="Node2D" parent="."]
@@ -37,12 +44,12 @@ offset_left = 40.0
 offset_top = -120.0
 offset_right = 80.0
 offset_bottom = -97.0
-text = "1"
+text = "3"
 metadata/_edit_use_anchors_ = true
 
 [node name="CostSpr" type="Sprite2D" parent="CardCost"]
 position = Vector2(66, -108)
-texture = ExtResource("2_3gm3e")
+texture = ExtResource("2_x8s1q")
 
 [node name="CardDescription" type="Node2D" parent="."]
 
@@ -51,6 +58,16 @@ offset_left = -71.0
 offset_top = 8.0
 offset_right = 45.0
 offset_bottom = 31.0
-text = "Deal 1 Damage"
+text = "This is a card"
 autowrap_mode = 2
 metadata/_edit_use_anchors_ = true
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(0.5, 0)
+shape = SubResource("RectangleShape2D_cwoxu")
+
+[connection signal="input_event" from="Area2D" to="." method="_on_area_2d_input_event"]
+[connection signal="mouse_entered" from="Area2D" to="." method="_on_area_2d_mouse_entered"]
+[connection signal="mouse_exited" from="Area2D" to="." method="_on_area_2d_mouse_exited"]

@@ -1,15 +1,14 @@
-[gd_scene load_steps=5 format=3 uid="uid://d2dxmqnfkm284"]
+[gd_scene load_steps=3 format=3 uid="uid://d2dxmqnfkm284"]
 
+[ext_resource type="Script" path="res://Card Scenes/strike.gd" id="1_08a21"]
 [ext_resource type="PackedScene" uid="uid://c5unkrxf8u18p" path="res://card.tscn" id="1_twqcn"]
-[ext_resource type="Texture2D" uid="uid://drngv8orhpi1x" path="res://Assets/poise_cost_icon.png" id="2_dn5f4"]
-[ext_resource type="Texture2D" uid="uid://ckhrm1kakgtag" path="res://Assets/duelist_card_base.png" id="3_2qh4u"]
-[ext_resource type="Texture2D" uid="uid://bedleecnra4hf" path="res://Assets/strike_art.png" id="3_gspk3"]
 
 [node name="Strike" type="Node2D"]
+script = ExtResource("1_08a21")
 
 [node name="Card" parent="." instance=ExtResource("1_twqcn")]
 card_name = "Strike"
 card_description = "Deal 1 + Modifier Damage"
-card_cost_resource = ExtResource("2_dn5f4")
-card_image = ExtResource("3_gspk3")
-card_background = ExtResource("3_2qh4u")
+
+[connection signal="mouse_entered" from="Card" to="." method="_on_card_mouse_entered"]
+[connection signal="mouse_exited" from="Card" to="." method="_on_card_mouse_exited"]
