@@ -1,0 +1,48 @@
+[gd_scene load_steps=5 format=3 uid="uid://dnsora3lr0ro5"]
+
+[ext_resource type="PackedScene" uid="uid://c8uiuff7tftri" path="res://deck_n_hand.tscn" id="1_2eew1"]
+[ext_resource type="Texture2D" uid="uid://dxix5f7ebo4k7" path="res://Assets/RangerPortrait.png" id="2_otn1f"]
+[ext_resource type="Script" path="res://Scripts/character.gd" id="2_pg0s2"]
+[ext_resource type="Texture2D" uid="uid://betqtwiihe121" path="res://Assets/biter.png" id="3_hc0yc"]
+
+[node name="Main" type="Node2D"]
+
+[node name="DeckNHand" parent="." instance=ExtResource("1_2eew1")]
+
+[node name="GameScreen" type="Node2D" parent="."]
+
+[node name="PlayerCharacter" type="Node2D" parent="GameScreen"]
+script = ExtResource("2_pg0s2")
+
+[node name="Portrait" type="Sprite2D" parent="GameScreen/PlayerCharacter"]
+position = Vector2(58, 55)
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("2_otn1f")
+
+[node name="Healthbar" type="ProgressBar" parent="GameScreen/PlayerCharacter"]
+offset_left = 105.0
+offset_top = 13.0
+offset_right = 205.0
+offset_bottom = 23.0
+max_value = 10.0
+step = 1.0
+value = 10.0
+show_percentage = false
+
+[node name="EnemyCharacter" type="Node2D" parent="GameScreen"]
+script = ExtResource("2_pg0s2")
+
+[node name="Sprite" type="Sprite2D" parent="GameScreen/EnemyCharacter"]
+position = Vector2(366, 147)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("3_hc0yc")
+
+[node name="Healthbar" type="ProgressBar" parent="GameScreen/EnemyCharacter"]
+offset_left = 313.0
+offset_top = 130.0
+offset_right = 413.0
+offset_bottom = 140.0
+max_value = 10.0
+step = 1.0
+value = 10.0
+show_percentage = false

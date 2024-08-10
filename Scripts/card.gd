@@ -55,7 +55,7 @@ func unhighlight():
 	base_sprite.set_modulate(Color(1,1,1,1))
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
+func _process(_delta):
 	_update_graphics()
 	
 
@@ -69,5 +69,5 @@ func _on_area_2d_mouse_exited():
 
 
 
-func _on_area_2d_input_event(viewport, event, shape_idx):
-	pass # Replace with function body.
+#func _on_area_2d_input_event(viewport, event, shape_idx):
+#	pass # Replace with function body.

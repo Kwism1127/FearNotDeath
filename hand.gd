@@ -74,7 +74,7 @@ func _input(event):
 		card.queue_free()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
+func _process(_delta):
 	#tool logic
 	current_card_index = -1
 	for card in hand:

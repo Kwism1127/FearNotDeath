@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://b12nfuafv2wmp" path="res://Assets/hemomancer_card_base.png" id="4_qugee"]
 
 [node name="Dodge" type="Node2D"]
+scale = Vector2(0.5, 0.5)
 script = ExtResource("1_yhhg6")
 
 [node name="Card" parent="." instance=ExtResource("1_6kq71")]
