@@ -1,11 +1,13 @@
-[gd_scene load_steps=5 format=3 uid="uid://dnsora3lr0ro5"]
+[gd_scene load_steps=6 format=3 uid="uid://dnsora3lr0ro5"]
 
 [ext_resource type="PackedScene" uid="uid://c8uiuff7tftri" path="res://deck_n_hand.tscn" id="1_2eew1"]
+[ext_resource type="Script" path="res://Scripts/main.gd" id="1_x0rx3"]
 [ext_resource type="Texture2D" uid="uid://dxix5f7ebo4k7" path="res://Assets/RangerPortrait.png" id="2_otn1f"]
 [ext_resource type="Script" path="res://Scripts/character.gd" id="2_pg0s2"]
 [ext_resource type="Texture2D" uid="uid://betqtwiihe121" path="res://Assets/biter.png" id="3_hc0yc"]
 
 [node name="Main" type="Node2D"]
+script = ExtResource("1_x0rx3")
 
 [node name="DeckNHand" parent="." instance=ExtResource("1_2eew1")]
 
@@ -46,3 +48,12 @@ max_value = 10.0
 step = 1.0
 value = 10.0
 show_percentage = false
+
+[node name="PoiseAmount" type="Label" parent="."]
+offset_left = 107.0
+offset_top = 29.0
+offset_right = 147.0
+offset_bottom = 52.0
+text = "10"
+
+[connection signal="card_activated" from="DeckNHand" to="." method="_on_deck_n_hand_card_activated"]

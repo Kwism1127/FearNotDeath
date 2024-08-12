@@ -1,8 +1,9 @@
 @tool
 class_name Character extends Node2D
 
-@export var max_hp: int = 10;
-@export var current_hp: int = 10;
+@export var max_hp: int = 10
+@export var current_hp: int = 10
+@export var poise: int = 5
 
 func set_hp(_max: int, _current: int):
 	max_hp = _max
@@ -13,6 +14,12 @@ func update_hpbar():
 		($Healthbar as ProgressBar).max_value = max_hp
 	if ($Healthbar as ProgressBar).value != current_hp:
 		($Healthbar as ProgressBar).value = current_hp
+
+func spend_poise(_amount: int):
+	poise -= _amount
+
+func take_damage(_amount: int):
+	current_hp -= _amount
 
 # Called when the node enters the scene tree for the first time.
 func _ready():

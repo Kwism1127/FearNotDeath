@@ -1,15 +1,19 @@
-[gd_scene load_steps=3 format=3 uid="uid://d2dxmqnfkm284"]
+[gd_scene load_steps=4 format=3 uid="uid://d2dxmqnfkm284"]
 
-[ext_resource type="Script" path="res://Card Scenes/strike.gd" id="1_08a21"]
+[ext_resource type="Script" path="res://Card Scenes/complete_card.gd" id="1_cj2vh"]
 [ext_resource type="PackedScene" uid="uid://c5unkrxf8u18p" path="res://card.tscn" id="1_twqcn"]
+[ext_resource type="Script" path="res://Scripts/strike_action.gd" id="3_7mn3b"]
 
 [node name="Strike" type="Node2D"]
 scale = Vector2(0.5, 0.5)
-script = ExtResource("1_08a21")
+script = ExtResource("1_cj2vh")
 
 [node name="Card" parent="." instance=ExtResource("1_twqcn")]
 card_name = "Strike"
 card_description = "Deal 1 + Modifier Damage"
+
+[node name="Function" type="Node2D" parent="."]
+script = ExtResource("3_7mn3b")
 
 [connection signal="mouse_entered" from="Card" to="." method="_on_card_mouse_entered"]
 [connection signal="mouse_exited" from="Card" to="." method="_on_card_mouse_exited"]
