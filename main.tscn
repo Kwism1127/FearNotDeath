@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=3 uid="uid://dnsora3lr0ro5"]
+[gd_scene load_steps=7 format=3 uid="uid://dnsora3lr0ro5"]
 
 [ext_resource type="PackedScene" uid="uid://c8uiuff7tftri" path="res://deck_n_hand.tscn" id="1_2eew1"]
 [ext_resource type="Script" path="res://Scripts/main.gd" id="1_x0rx3"]
 [ext_resource type="Texture2D" uid="uid://dxix5f7ebo4k7" path="res://Assets/RangerPortrait.png" id="2_otn1f"]
 [ext_resource type="Script" path="res://Scripts/character.gd" id="2_pg0s2"]
 [ext_resource type="Texture2D" uid="uid://betqtwiihe121" path="res://Assets/biter.png" id="3_hc0yc"]
+[ext_resource type="Texture2D" uid="uid://drngv8orhpi1x" path="res://Assets/poise_cost_icon.png" id="5_uqpks"]
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_x0rx3")
@@ -31,6 +32,17 @@ step = 1.0
 value = 10.0
 show_percentage = false
 
+[node name="PoiseAmount" type="Label" parent="GameScreen/PlayerCharacter"]
+offset_left = 133.0
+offset_top = 25.0
+offset_right = 173.0
+offset_bottom = 48.0
+text = "10"
+
+[node name="PoiseIcon" type="Sprite2D" parent="GameScreen/PlayerCharacter"]
+position = Vector2(118, 38)
+texture = ExtResource("5_uqpks")
+
 [node name="EnemyCharacter" type="Node2D" parent="GameScreen"]
 script = ExtResource("2_pg0s2")
 
@@ -49,11 +61,31 @@ step = 1.0
 value = 10.0
 show_percentage = false
 
-[node name="PoiseAmount" type="Label" parent="."]
-offset_left = 107.0
-offset_top = 29.0
-offset_right = 147.0
-offset_bottom = 52.0
+[node name="PoiseAmount" type="Label" parent="GameScreen/EnemyCharacter"]
+offset_left = 343.0
+offset_top = 105.0
+offset_right = 383.0
+offset_bottom = 128.0
 text = "10"
 
+[node name="PoiseIcon" type="Sprite2D" parent="GameScreen/EnemyCharacter"]
+position = Vector2(329, 117)
+texture = ExtResource("5_uqpks")
+
+[node name="DamagePlayer1" type="Button" parent="."]
+offset_left = 14.0
+offset_top = 102.0
+offset_right = 143.0
+offset_bottom = 133.0
+text = "Deal 1 to player"
+
+[node name="DamagePlayer3" type="Button" parent="."]
+offset_left = 14.0
+offset_top = 135.0
+offset_right = 143.0
+offset_bottom = 166.0
+text = "Deal 3 to player"
+
 [connection signal="card_activated" from="DeckNHand" to="." method="_on_deck_n_hand_card_activated"]
+[connection signal="pressed" from="DamagePlayer1" to="." method="_on_damage_player_1_pressed"]
+[connection signal="pressed" from="DamagePlayer3" to="." method="_on_damage_player_3_pressed"]

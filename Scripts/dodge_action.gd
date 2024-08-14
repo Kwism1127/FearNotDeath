@@ -1,7 +1,7 @@
 extends Node2D
 
 func activate(_game_state: Dictionary):
-	pass
+	_game_state.get("caster").gain_poise(1)
 
 
 # Called when the node enters the scene tree for the first time.

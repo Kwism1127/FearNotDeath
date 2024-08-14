@@ -18,8 +18,18 @@ func update_hpbar():
 func spend_poise(_amount: int):
 	poise -= _amount
 
+func gain_poise(_amount: int):
+	poise += _amount 
+	if poise > max_hp:
+		poise = max_hp
+
 func take_damage(_amount: int):
-	current_hp -= _amount
+	if _amount <= poise:
+		poise -= _amount
+	elif _amount > poise:
+		var _damage: int = _amount - poise
+		poise = 0
+		current_hp -= _damage
 
 # Called when the node enters the scene tree for the first time.
 func _ready():

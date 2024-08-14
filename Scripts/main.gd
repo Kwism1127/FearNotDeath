@@ -11,9 +11,25 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	$PoiseAmount.set_text(str($GameScreen/PlayerCharacter.poise))
-
-
+	$GameScreen/PlayerCharacter/PoiseAmount.set_text(str($GameScreen/PlayerCharacter.poise))
+	
+	#hide enemy poise if not applicable
+	if $GameScreen/EnemyCharacter.poise > 0:
+		$GameScreen/EnemyCharacter/PoiseAmount.visible = true
+		$GameScreen/EnemyCharacter/PoiseIcon.visible = true
+		$GameScreen/EnemyCharacter/PoiseAmount.set_text(str($GameScreen/EnemyCharacter.poise))
+	else: 
+		$GameScreen/EnemyCharacter/PoiseAmount.visible = false
+		$GameScreen/EnemyCharacter/PoiseIcon.visible = false
+	
 func _on_deck_n_hand_card_activated(_card: Complete_Card):
 	_card.activate(game_state)
 
+
+
+func _on_damage_player_1_pressed():
+	$GameScreen/PlayerCharacter.take_damage(1)
+
+
+func _on_damage_player_3_pressed():
+	$GameScreen/PlayerCharacter.take_damage(3)
