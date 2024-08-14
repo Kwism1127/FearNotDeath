@@ -49,6 +49,20 @@ func remove_card(_index: int) -> Node2D:
 	reposition_cards()
 	return removed_card
 	
+func remove_card_by_entity(_card: Complete_Card):
+	var _remove_index = hand.find(_card)
+	remove_card(_remove_index)
+	_card.queue_free()
+	
+	
+
+func empty():
+	current_card_index = -1
+	for card in hand:
+		card.queue_free()
+	hand = []
+	touched = []
+
 func reposition_cards():
 	var card_spread = min(angle_limit / hand.size(), max_card_spread)
 	var current_angle = (-(card_spread * (hand.size() - 1) / 2)) - 90
@@ -72,9 +86,9 @@ func _ready():
 
 func _input(event):
 	if event.is_action_pressed("left_mouse_click") && current_card_index >= 0:
-		var card = remove_card(current_card_index)
+		var card = hand[current_card_index]
 		card_activated.emit(card)
-		card.queue_free()
+		
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):

@@ -9,6 +9,7 @@ signal mouse_exited(card: Card)
 @export var card_cost_resource: Texture2D
 @export var card_image: Texture2D
 @export var card_background: Texture2D
+@export var card_type: String = "Poise"
 
 @onready var name_label: Label = $CardName/NameLbl
 @onready var description_label: Label = $CardDescription/DescriptionLbl

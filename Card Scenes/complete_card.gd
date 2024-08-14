@@ -10,6 +10,10 @@ func highlight():
 func unhighlight():
 	$Card.unhighlight()
 
+func get_cost() -> Array:
+	var _cost = [$Card.card_type, $Card.card_cost]
+	return _cost
+
 func _on_card_mouse_entered(_card: Card):
 	mouse_entered.emit(self)
 

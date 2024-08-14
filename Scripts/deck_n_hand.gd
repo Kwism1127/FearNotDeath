@@ -6,7 +6,11 @@ signal card_activated(_card: Complete_Card)
 @onready var dodge_card: PackedScene = preload("res://Card Scenes/dodge.tscn")
 @onready var hand: Hand = $Hand
 
+func remove_card_by_entity(_card: Node2D):
+	$Hand.remove_card_by_entity(_card)
 
+func reset():
+	$Hand.empty()
 
 func _on_card_spawn_tester_0_pressed():
 	var card = strike_card.instantiate()

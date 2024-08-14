@@ -11,6 +11,7 @@ script = ExtResource("1_cj2vh")
 [node name="Card" parent="." instance=ExtResource("1_twqcn")]
 card_name = "Strike"
 card_description = "Deal 1 + Modifier Damage"
+card_cost = 1
 
 [node name="Function" type="Node2D" parent="."]
 script = ExtResource("3_7mn3b")
