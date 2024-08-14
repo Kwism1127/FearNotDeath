@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://dnsora3lr0ro5"]
+[gd_scene load_steps=11 format=3 uid="uid://dnsora3lr0ro5"]
 
 [ext_resource type="PackedScene" uid="uid://c8uiuff7tftri" path="res://deck_n_hand.tscn" id="1_2eew1"]
 [ext_resource type="Script" path="res://Scripts/main.gd" id="1_x0rx3"]
@@ -7,6 +7,8 @@
 [ext_resource type="Script" path="res://Scripts/character.gd" id="2_pg0s2"]
 [ext_resource type="Texture2D" uid="uid://betqtwiihe121" path="res://Assets/biter.png" id="3_hc0yc"]
 [ext_resource type="Texture2D" uid="uid://drngv8orhpi1x" path="res://Assets/poise_cost_icon.png" id="5_uqpks"]
+
+[sub_resource type="Theme" id="Theme_h223y"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_82kcj"]
 font_size = 32
@@ -38,6 +40,7 @@ offset_left = 105.0
 offset_top = 13.0
 offset_right = 205.0
 offset_bottom = 23.0
+theme = SubResource("Theme_h223y")
 max_value = 10.0
 step = 1.0
 value = 10.0
