@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://dnsora3lr0ro5"]
+[gd_scene load_steps=15 format=3 uid="uid://dnsora3lr0ro5"]
 
 [ext_resource type="PackedScene" uid="uid://c8uiuff7tftri" path="res://deck_n_hand.tscn" id="1_2eew1"]
 [ext_resource type="Script" path="res://Scripts/main.gd" id="1_x0rx3"]
@@ -7,6 +7,10 @@
 [ext_resource type="Script" path="res://Scripts/character.gd" id="2_pg0s2"]
 [ext_resource type="Texture2D" uid="uid://betqtwiihe121" path="res://Assets/biter.png" id="3_hc0yc"]
 [ext_resource type="Texture2D" uid="uid://drngv8orhpi1x" path="res://Assets/poise_cost_icon.png" id="5_uqpks"]
+[ext_resource type="Texture2D" uid="uid://bi03t0rnkkm6s" path="res://Assets/collection_button.png" id="8_1bxhu"]
+[ext_resource type="Texture2D" uid="uid://bgmklftx2t1pb" path="res://Assets/collection_button_pressed.png" id="9_8s1kr"]
+[ext_resource type="Texture2D" uid="uid://cynsm45mysxpx" path="res://Assets/collection_button_hovered.png" id="10_cfrwu"]
+[ext_resource type="PackedScene" uid="uid://djqvmctlbw1rk" path="res://UI Scenes/deck_viewer.tscn" id="11_ew7gk"]
 
 [sub_resource type="Theme" id="Theme_h223y"]
 
@@ -19,6 +23,16 @@ font_color = Color(0, 0, 0, 1)
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_x0rx3")
+
+[node name="ShowDeck" type="TextureButton" parent="."]
+offset_left = 17.0
+offset_top = 311.0
+offset_right = 145.0
+offset_bottom = 439.0
+scale = Vector2(0.25, 0.25)
+texture_normal = ExtResource("8_1bxhu")
+texture_pressed = ExtResource("9_8s1kr")
+texture_hover = ExtResource("10_cfrwu")
 
 [node name="GameManager" type="Node2D" parent="."]
 script = ExtResource("2_8pcyo")
@@ -117,9 +131,9 @@ offset_right = 622.0
 offset_bottom = 294.0
 text = "End Turn"
 
-[node name="EndScreenOverlays" type="CanvasLayer" parent="."]
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
 
-[node name="GAMEOVER" type="ColorRect" parent="EndScreenOverlays"]
+[node name="GAMEOVER" type="ColorRect" parent="CanvasLayer"]
 visible = false
 anchors_preset = 15
 anchor_right = 1.0
@@ -128,7 +142,7 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.243137, 0, 0, 0.854902)
 
-[node name="GAMEOVER" type="Label" parent="EndScreenOverlays/GAMEOVER"]
+[node name="GAMEOVER" type="Label" parent="CanvasLayer/GAMEOVER"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -146,7 +160,7 @@ label_settings = SubResource("LabelSettings_82kcj")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="VICTORY" type="ColorRect" parent="EndScreenOverlays"]
+[node name="VICTORY" type="ColorRect" parent="CanvasLayer"]
 visible = false
 anchors_preset = 15
 anchor_right = 1.0
@@ -155,7 +169,7 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.733333, 0.964706, 0.960784, 0.6)
 
-[node name="VICTORY" type="Label" parent="EndScreenOverlays/VICTORY"]
+[node name="VICTORY" type="Label" parent="CanvasLayer/VICTORY"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -173,6 +187,24 @@ label_settings = SubResource("LabelSettings_7qj3n")
 horizontal_alignment = 1
 vertical_alignment = 1
 
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -250.0
+offset_top = -150.0
+offset_right = 250.0
+offset_bottom = 150.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="DeckViewer" parent="CanvasLayer" instance=ExtResource("11_ew7gk")]
+visible = false
+
+[connection signal="pressed" from="ShowDeck" to="." method="_on_show_deck_pressed"]
 [connection signal="card_activated" from="DeckNHand" to="." method="_on_deck_n_hand_card_activated"]
 [connection signal="pressed" from="DamagePlayer1" to="." method="_on_damage_player_1_pressed"]
 [connection signal="pressed" from="DamagePlayer3" to="." method="_on_damage_player_3_pressed"]

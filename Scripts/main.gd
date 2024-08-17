@@ -21,6 +21,9 @@ func restart_game():
 	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
+	if !game_manager.is_running:
+		return
+	
 	$GameScreen/PlayerCharacter/PoiseAmount.set_text(str($GameScreen/PlayerCharacter.poise))
 	
 	if $GameScreen/PlayerCharacter.current_hp <= 0:
@@ -56,14 +59,14 @@ func _process(_delta):
 		game_manager.transition_state(Game_Manager.GameState.PLAYER_TURN)
 	
 	if game_manager.current_state == Game_Manager.GameState.VICTORY:
-		$EndScreenOverlays/VICTORY.visible = true
+		$CanvasLayer/VICTORY.visible = true
 	else:
-		$EndScreenOverlays/VICTORY.visible = false
+		$CanvasLayer/VICTORY.visible = false
 	
 	if game_manager.current_state == Game_Manager.GameState.GAMEOVER:
-		$EndScreenOverlays/GAMEOVER.visible = true
+		$CanvasLayer/GAMEOVER.visible = true
 	else:
-		$EndScreenOverlays/GAMEOVER.visible = false
+		$CanvasLayer/GAMEOVER.visible = false
 	
 func _on_deck_n_hand_card_activated(_card: ):
 	var _cost_package = _card.get_cost()
@@ -120,3 +123,12 @@ func _on_end_turn_button_pressed():
 	if game_manager.current_state == Game_Manager.GameState.PLAYER_TURN:
 		game_manager.transition_state(Game_Manager.GameState.ENEMY_TURN)
 
+
+
+func _on_show_deck_pressed():
+	game_manager.pause()
+	$CanvasLayer/DeckViewer.visible = true
+	
+	var list = Deck.new()
+	list.add_card()
+	$CanvasLayer/DeckViewer.display_card_list(list)
