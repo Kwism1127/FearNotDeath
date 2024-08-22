@@ -24,6 +24,14 @@ offset_right = 636.0
 offset_bottom = 66.0
 text = "Create Dodge Card"
 
+[node name="Card Destroyer" type="Button" parent="."]
+offset_left = 524.0
+offset_top = 67.0
+offset_right = 635.0
+offset_bottom = 98.0
+text = "Remove Card"
+
 [connection signal="card_activated" from="Hand" to="." method="_on_hand_card_activated"]
 [connection signal="pressed" from="CardSpawnTester0" to="." method="_on_card_spawn_tester_0_pressed"]
 [connection signal="pressed" from="CardSpawnTester1" to="." method="_on_card_spawn_tester_1_pressed"]
+[connection signal="pressed" from="Card Destroyer" to="." method="_on_card_destroyer_pressed"]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://dnsora3lr0ro5"]
+[gd_scene load_steps=19 format=3 uid="uid://dnsora3lr0ro5"]
 
 [ext_resource type="PackedScene" uid="uid://c8uiuff7tftri" path="res://deck_n_hand.tscn" id="1_2eew1"]
 [ext_resource type="Script" path="res://Scripts/main.gd" id="1_x0rx3"]
@@ -11,6 +11,9 @@
 [ext_resource type="Texture2D" uid="uid://bgmklftx2t1pb" path="res://Assets/collection_button_pressed.png" id="9_8s1kr"]
 [ext_resource type="Texture2D" uid="uid://cynsm45mysxpx" path="res://Assets/collection_button_hovered.png" id="10_cfrwu"]
 [ext_resource type="PackedScene" uid="uid://djqvmctlbw1rk" path="res://UI Scenes/deck_viewer.tscn" id="11_ew7gk"]
+[ext_resource type="Texture2D" uid="uid://doqpecs5mmrkt" path="res://Assets/menu_button.png" id="12_hheta"]
+[ext_resource type="Texture2D" uid="uid://c0bekly0m40gp" path="res://Assets/menu_button_pressed.png" id="13_ldysk"]
+[ext_resource type="Texture2D" uid="uid://de8fyej7jwjju" path="res://Assets/menu_button_hovered.png" id="14_1kxwm"]
 
 [sub_resource type="Theme" id="Theme_h223y"]
 
@@ -21,14 +24,17 @@ font_size = 32
 font_size = 32
 font_color = Color(0, 0, 0, 1)
 
+[sub_resource type="LabelSettings" id="LabelSettings_tv1ij"]
+font_size = 25
+
 [node name="Main" type="Node2D"]
 script = ExtResource("1_x0rx3")
 
 [node name="ShowDeck" type="TextureButton" parent="."]
-offset_left = 17.0
-offset_top = 311.0
-offset_right = 145.0
-offset_bottom = 439.0
+offset_left = 6.0
+offset_top = 282.0
+offset_right = 134.0
+offset_bottom = 410.0
 scale = Vector2(0.25, 0.25)
 texture_normal = ExtResource("8_1bxhu")
 texture_pressed = ExtResource("9_8s1kr")
@@ -110,20 +116,6 @@ offset_right = 416.0
 offset_bottom = 126.0
 text = "test"
 
-[node name="DamagePlayer1" type="Button" parent="."]
-offset_left = 14.0
-offset_top = 102.0
-offset_right = 143.0
-offset_bottom = 133.0
-text = "Deal 1 to player"
-
-[node name="DamagePlayer3" type="Button" parent="."]
-offset_left = 14.0
-offset_top = 135.0
-offset_right = 143.0
-offset_bottom = 166.0
-text = "Deal 3 to player"
-
 [node name="EndTurnButton" type="Button" parent="."]
 offset_left = 544.0
 offset_top = 263.0
@@ -187,7 +179,7 @@ label_settings = SubResource("LabelSettings_7qj3n")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
+[node name="DeckViewerBackground" type="ColorRect" parent="CanvasLayer"]
 visible = false
 anchors_preset = 8
 anchor_left = 0.5
@@ -200,12 +192,68 @@ offset_right = 250.0
 offset_bottom = 150.0
 grow_horizontal = 2
 grow_vertical = 2
+color = Color(1, 1, 1, 0.439216)
 
 [node name="DeckViewer" parent="CanvasLayer" instance=ExtResource("11_ew7gk")]
 visible = false
 
+[node name="MenuOverlay" type="ColorRect" parent="CanvasLayer"]
+visible = false
+offset_right = 128.0
+offset_bottom = 360.0
+color = Color(0, 0, 0, 0.94902)
+
+[node name="PAUSED" type="Label" parent="CanvasLayer/MenuOverlay"]
+layout_mode = 0
+offset_left = 14.0
+offset_top = 4.0
+offset_right = 111.0
+offset_bottom = 42.0
+text = "PAUSED"
+label_settings = SubResource("LabelSettings_tv1ij")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Restart" type="Button" parent="CanvasLayer/MenuOverlay"]
+layout_mode = 0
+offset_left = 31.0
+offset_top = 61.0
+offset_right = 96.0
+offset_bottom = 92.0
+text = "Restart"
+
+[node name="Return2Menu" type="Button" parent="CanvasLayer/MenuOverlay"]
+layout_mode = 0
+offset_left = 26.0
+offset_top = 140.0
+offset_right = 99.0
+offset_bottom = 194.0
+text = "Return 
+to Menu"
+
+[node name="Quit" type="Button" parent="CanvasLayer/MenuOverlay"]
+layout_mode = 0
+offset_left = 28.0
+offset_top = 244.0
+offset_right = 93.0
+offset_bottom = 275.0
+text = "Quit
+"
+
+[node name="MenuButton" type="TextureButton" parent="CanvasLayer"]
+offset_left = 6.0
+offset_top = 321.0
+offset_right = 134.0
+offset_bottom = 449.0
+scale = Vector2(0.25, 0.25)
+texture_normal = ExtResource("12_hheta")
+texture_pressed = ExtResource("13_ldysk")
+texture_hover = ExtResource("14_1kxwm")
+
 [connection signal="pressed" from="ShowDeck" to="." method="_on_show_deck_pressed"]
 [connection signal="card_activated" from="DeckNHand" to="." method="_on_deck_n_hand_card_activated"]
-[connection signal="pressed" from="DamagePlayer1" to="." method="_on_damage_player_1_pressed"]
-[connection signal="pressed" from="DamagePlayer3" to="." method="_on_damage_player_3_pressed"]
 [connection signal="pressed" from="EndTurnButton" to="." method="_on_end_turn_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/MenuOverlay/Restart" to="." method="_on_restart_pressed"]
+[connection signal="pressed" from="CanvasLayer/MenuOverlay/Return2Menu" to="." method="_on_return_2_menu_pressed"]
+[connection signal="pressed" from="CanvasLayer/MenuOverlay/Quit" to="." method="_on_quit_pressed"]
+[connection signal="pressed" from="CanvasLayer/MenuButton" to="." method="_on_menu_button_pressed"]

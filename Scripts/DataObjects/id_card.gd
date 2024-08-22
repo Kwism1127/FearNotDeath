@@ -1,4 +1,4 @@
-class_name IDCard extends RefCounted
+class_name IDCard extends Resource
 
 var id: int
 var card: Complete_Card

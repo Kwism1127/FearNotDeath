@@ -6,11 +6,14 @@ extends Node2D
 	"targets": [$GameScreen/EnemyCharacter]
 }
 
+@onready var deck: Deck = Deck.new()
+
 var enemy_state: int = 0
+var deck_viewer_toggle: int = 0
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass # Replace with function body.
+	$DeckNHand.deck = deck
 
 func restart_game():
 	game_manager.current_state = Game_Manager.GameState.PLAYER_TURN
@@ -111,14 +114,6 @@ func _input(event):
 	if event.is_action_pressed("restart"):
 		restart_game()
 
-func _on_damage_player_1_pressed():
-	$GameScreen/PlayerCharacter.take_damage(1)
-
-
-func _on_damage_player_3_pressed():
-	$GameScreen/PlayerCharacter.take_damage(3)
-
-
 func _on_end_turn_button_pressed():
 	if game_manager.current_state == Game_Manager.GameState.PLAYER_TURN:
 		game_manager.transition_state(Game_Manager.GameState.ENEMY_TURN)
@@ -126,9 +121,32 @@ func _on_end_turn_button_pressed():
 
 
 func _on_show_deck_pressed():
-	game_manager.pause()
-	$CanvasLayer/DeckViewer.visible = true
-	
-	var list = Deck.new()
-	list.add_card()
-	$CanvasLayer/DeckViewer.display_card_list(list)
+	if deck_viewer_toggle == 0:
+		game_manager.pause()
+		$CanvasLayer/DeckViewer.visible = true
+		$CanvasLayer/DeckViewerBackground.visible = true
+		$CanvasLayer/DeckViewer.display_card_list(deck.get_cards())
+		deck_viewer_toggle = 1
+	else:
+		game_manager.unpause()
+		$CanvasLayer/DeckViewer.visible = false
+		$CanvasLayer/DeckViewerBackground.visible = false
+		deck_viewer_toggle = 0
+
+func _on_menu_button_pressed():
+	$CanvasLayer/MenuOverlay.visible = !$CanvasLayer/MenuOverlay.visible
+	game_manager.is_running = !game_manager.is_running
+
+
+func _on_restart_pressed():
+	$CanvasLayer/GAMEOVER.visible = false
+	$CanvasLayer/VICTORY.visible = false
+	restart_game()
+
+
+func _on_return_2_menu_pressed():
+	get_tree().change_scene_to_file("res://UI Scenes/main_menu.tscn")
+
+
+func _on_quit_pressed():
+	get_tree().quit()
