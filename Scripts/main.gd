@@ -7,13 +7,32 @@ extends Node2D
 }
 
 @onready var deck: Deck = Deck.new()
+@onready var discard_pile: Deck = Deck.new()
 
 var enemy_state: int = 0
 var deck_viewer_toggle: int = 0
+var discard_viewer_toggle: int = 0
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	$DeckNHand.deck = deck
+	var _card
+	
+	var _i = 0
+	while _i < 10:
+		$CanvasLayer/DeckViewer.clear_display()
+		_card = $DeckNHand.strike_card.instantiate()
+		deck.add_card(_card)
+		_i += 1
+	while _i >= 10 && _i < 20:
+		$CanvasLayer/DeckViewer.clear_display()
+		_card = $DeckNHand.dodge_card.instantiate()
+		deck.add_card(_card)
+		_i += 1
+	
+	$CanvasLayer/DeckViewer.clear_display()
+	$DeckNHand.draw_from_pile(deck, 4)
+
 
 func restart_game():
 	game_manager.current_state = Game_Manager.GameState.PLAYER_TURN
@@ -60,6 +79,12 @@ func _process(_delta):
 		#cyclical behavior
 		enemy_state = posmod(enemy_state + 1, 3)
 		game_manager.transition_state(Game_Manager.GameState.PLAYER_TURN)
+		if deck.get_cards().size() > 0:
+			$DeckNHand.draw_from_pile(deck, 4)
+		else:
+			deck = discard_pile
+			discard_pile.clear()
+			$DeckNHand.draw_from_pile(deck, 4)
 	
 	if game_manager.current_state == Game_Manager.GameState.VICTORY:
 		$CanvasLayer/VICTORY.visible = true
@@ -79,30 +104,40 @@ func _on_deck_n_hand_card_activated(_card: ):
 	if _resource == "Poise":
 		if _cost <= $GameScreen/PlayerCharacter.poise:
 			_card.activate(game_state)
+			var _copy = $DeckNHand.return_copy(_card)
+			discard_pile.add_card(_copy)
 			$DeckNHand.remove_card_by_entity(_card)
 		else:
 			pass
 	elif _resource == "Hp":
 		if _cost <= $GameScreen/PlayerCharacter.current_hp:
 			_card.activate(game_state)
+			var _copy = $DeckNHand.return_copy(_card)
+			discard_pile.add_card(_copy)
 			$DeckNHand.remove_card_by_entity(_card)
 		else:
 			pass
 	elif _resource == "Bullets":
 		if _cost <= $GameScreen/PlayerCharacter.bullets:
 			_card.activate(game_state)
+			var _copy = $DeckNHand.return_copy(_card)
+			discard_pile.add_card(_copy)
 			$DeckNHand.remove_card_by_entity(_card)
 		else:
 			pass
 	elif _resource == "Bolts":
 		if _cost <= $GameScreen/PlayerCharacter.bolts:
 			_card.activate(game_state)
+			var _copy = $DeckNHand.return_copy(_card)
+			discard_pile.add_card(_copy)
 			$DeckNHand.remove_card_by_entity(_card)
 		else:
 			pass
 	else:
 		if _cost <= $GameScreen/PlayerCharacter.poise:
 			_card.activate(game_state)
+			var _copy = $DeckNHand.return_copy(_card)
+			discard_pile.add_card(_copy)
 			$DeckNHand.remove_card_by_entity(_card)
 		
 		else:
@@ -117,6 +152,7 @@ func _input(event):
 func _on_end_turn_button_pressed():
 	if game_manager.current_state == Game_Manager.GameState.PLAYER_TURN:
 		game_manager.transition_state(Game_Manager.GameState.ENEMY_TURN)
+		$DeckNHand.send_hand_to_pile(discard_pile)
 
 
 
@@ -132,6 +168,20 @@ func _on_show_deck_pressed():
 		$CanvasLayer/DeckViewer.visible = false
 		$CanvasLayer/DeckViewerBackground.visible = false
 		deck_viewer_toggle = 0
+
+func _on_show_discard_pressed():
+	if discard_viewer_toggle == 0:
+		game_manager.pause()
+		$CanvasLayer/DeckViewer.visible = true
+		$CanvasLayer/DeckViewerBackground.visible = true
+		$CanvasLayer/DeckViewer.display_card_list(discard_pile.get_cards())
+		discard_viewer_toggle = 1
+	else:
+		game_manager.unpause()
+		$CanvasLayer/DeckViewer.visible = false
+		$CanvasLayer/DeckViewerBackground.visible = false
+		discard_viewer_toggle = 0
+
 
 func _on_menu_button_pressed():
 	$CanvasLayer/MenuOverlay.visible = !$CanvasLayer/MenuOverlay.visible
@@ -150,3 +200,5 @@ func _on_return_2_menu_pressed():
 
 func _on_quit_pressed():
 	get_tree().quit()
+
+

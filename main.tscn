@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://dnsora3lr0ro5"]
+[gd_scene load_steps=22 format=3 uid="uid://dnsora3lr0ro5"]
 
 [ext_resource type="PackedScene" uid="uid://c8uiuff7tftri" path="res://deck_n_hand.tscn" id="1_2eew1"]
 [ext_resource type="Script" path="res://Scripts/main.gd" id="1_x0rx3"]
@@ -14,6 +14,9 @@
 [ext_resource type="Texture2D" uid="uid://doqpecs5mmrkt" path="res://Assets/menu_button.png" id="12_hheta"]
 [ext_resource type="Texture2D" uid="uid://c0bekly0m40gp" path="res://Assets/menu_button_pressed.png" id="13_ldysk"]
 [ext_resource type="Texture2D" uid="uid://de8fyej7jwjju" path="res://Assets/menu_button_hovered.png" id="14_1kxwm"]
+[ext_resource type="Texture2D" uid="uid://bfhrvje0cfym6" path="res://Assets/discard_button.png" id="15_rtt5k"]
+[ext_resource type="Texture2D" uid="uid://6qpdenkpv3os" path="res://Assets/discard_button_pressed.png" id="16_770hj"]
+[ext_resource type="Texture2D" uid="uid://d1ee2qsvjcv2a" path="res://Assets/discard_button_hovered.png" id="17_nmlkw"]
 
 [sub_resource type="Theme" id="Theme_h223y"]
 
@@ -250,6 +253,16 @@ texture_normal = ExtResource("12_hheta")
 texture_pressed = ExtResource("13_ldysk")
 texture_hover = ExtResource("14_1kxwm")
 
+[node name="ShowDiscard" type="TextureButton" parent="."]
+offset_left = 6.0
+offset_top = 243.0
+offset_right = 134.0
+offset_bottom = 371.0
+scale = Vector2(0.25, 0.25)
+texture_normal = ExtResource("15_rtt5k")
+texture_pressed = ExtResource("16_770hj")
+texture_hover = ExtResource("17_nmlkw")
+
 [connection signal="pressed" from="ShowDeck" to="." method="_on_show_deck_pressed"]
 [connection signal="card_activated" from="DeckNHand" to="." method="_on_deck_n_hand_card_activated"]
 [connection signal="pressed" from="EndTurnButton" to="." method="_on_end_turn_button_pressed"]
@@ -257,3 +270,4 @@ texture_hover = ExtResource("14_1kxwm")
 [connection signal="pressed" from="CanvasLayer/MenuOverlay/Return2Menu" to="." method="_on_return_2_menu_pressed"]
 [connection signal="pressed" from="CanvasLayer/MenuOverlay/Quit" to="." method="_on_quit_pressed"]
 [connection signal="pressed" from="CanvasLayer/MenuButton" to="." method="_on_menu_button_pressed"]
+[connection signal="pressed" from="ShowDiscard" to="." method="_on_show_discard_pressed"]

@@ -8,6 +8,9 @@ func add_card(_card: Complete_Card):
 	card_collection[_card_id] = IDCard.new(_card_id, _card)
 	
 
+func clear():
+	card_collection.clear()
+
 func _generate_card_id(_card: Complete_Card) -> int:
 	id_counter += 1
 	return id_counter

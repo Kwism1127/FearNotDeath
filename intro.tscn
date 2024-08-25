@@ -11,6 +11,7 @@ offset_bottom = 360.0
 color = Color(0, 0, 0, 1)
 
 [node name="Paragraph0" type="RichTextLabel" parent="Background0"]
+layout_mode = 0
 offset_left = 23.0
 offset_top = 21.0
 offset_right = 616.0
@@ -19,6 +20,7 @@ text = "Radio is divine. Through radio, one can dictate to another, or all other
 
 [node name="Paragraph1" type="RichTextLabel" parent="Background0"]
 visible = false
+layout_mode = 0
 offset_left = 25.0
 offset_top = 133.0
 offset_right = 613.0
@@ -33,6 +35,7 @@ color = Color(0, 0, 0, 1)
 
 [node name="Paragraph0" type="RichTextLabel" parent="Background1"]
 visible = false
+layout_mode = 0
 offset_left = 18.0
 offset_top = 22.0
 offset_right = 618.0
@@ -41,6 +44,7 @@ text = "Days became weeks, became months, became years, and the divine became mu
 
 [node name="Paragraph1" type="RichTextLabel" parent="Background1"]
 visible = false
+layout_mode = 0
 offset_left = 18.0
 offset_top = 155.0
 offset_right = 611.0
@@ -55,6 +59,7 @@ color = Color(0, 0, 0, 1)
 
 [node name="Paragraph0" type="RichTextLabel" parent="Background2"]
 visible = false
+layout_mode = 0
 offset_left = 28.0
 offset_top = 29.0
 offset_right = 612.0
@@ -63,6 +68,7 @@ text = "Soon the static grew so loud that hearing anything else over the radio b
 
 [node name="Paragraph1" type="RichTextLabel" parent="Background2"]
 visible = false
+layout_mode = 0
 offset_left = 26.0
 offset_top = 159.0
 offset_right = 606.0
@@ -77,6 +83,7 @@ color = Color(0, 0, 0, 1)
 
 [node name="Paragraph0" type="RichTextLabel" parent="Background3"]
 visible = false
+layout_mode = 0
 offset_left = 28.0
 offset_top = 22.0
 offset_right = 612.0
@@ -86,6 +93,7 @@ text = "It grew larger each night. It grew closer each night. The static in your
 
 [node name="Paragraph1" type="RichTextLabel" parent="Background3"]
 visible = false
+layout_mode = 0
 offset_left = 28.0
 offset_top = 138.0
 offset_right = 610.0
