@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://dnsora3lr0ro5"]
+[gd_scene load_steps=25 format=3 uid="uid://dnsora3lr0ro5"]
 
 [ext_resource type="PackedScene" uid="uid://c8uiuff7tftri" path="res://deck_n_hand.tscn" id="1_2eew1"]
 [ext_resource type="Script" path="res://Scripts/main.gd" id="1_x0rx3"]
@@ -10,7 +10,10 @@
 [ext_resource type="Texture2D" uid="uid://bi03t0rnkkm6s" path="res://Assets/collection_button.png" id="8_1bxhu"]
 [ext_resource type="Texture2D" uid="uid://bgmklftx2t1pb" path="res://Assets/collection_button_pressed.png" id="9_8s1kr"]
 [ext_resource type="Texture2D" uid="uid://cynsm45mysxpx" path="res://Assets/collection_button_hovered.png" id="10_cfrwu"]
+[ext_resource type="Texture2D" uid="uid://d4dh4nd5pem3" path="res://Assets/arrow_cost_icon.png" id="10_j1nyc"]
+[ext_resource type="Texture2D" uid="uid://b11s80wj4q0mu" path="res://Assets/bullet_cost_icon.png" id="11_ee2ij"]
 [ext_resource type="PackedScene" uid="uid://djqvmctlbw1rk" path="res://UI Scenes/deck_viewer.tscn" id="11_ew7gk"]
+[ext_resource type="Texture2D" uid="uid://bd0yg1ko0ulvp" path="res://Assets/pinned_icon.png" id="12_80jgp"]
 [ext_resource type="Texture2D" uid="uid://doqpecs5mmrkt" path="res://Assets/menu_button.png" id="12_hheta"]
 [ext_resource type="Texture2D" uid="uid://c0bekly0m40gp" path="res://Assets/menu_button_pressed.png" id="13_ldysk"]
 [ext_resource type="Texture2D" uid="uid://de8fyej7jwjju" path="res://Assets/menu_button_hovered.png" id="14_1kxwm"]
@@ -52,6 +55,8 @@ script = ExtResource("2_8pcyo")
 
 [node name="PlayerCharacter" type="Node2D" parent="GameScreen"]
 script = ExtResource("2_pg0s2")
+base_poise = 3
+starting_bullets = 1
 
 [node name="Portrait" type="Sprite2D" parent="GameScreen/PlayerCharacter"]
 position = Vector2(58, 55)
@@ -76,9 +81,33 @@ offset_right = 173.0
 offset_bottom = 48.0
 text = "10"
 
+[node name="BoltsAmount" type="Label" parent="GameScreen/PlayerCharacter"]
+offset_left = 133.0
+offset_top = 49.0
+offset_right = 173.0
+offset_bottom = 72.0
+pivot_offset = Vector2(-216, 41)
+text = "10"
+
+[node name="BulletsAmount" type="Label" parent="GameScreen/PlayerCharacter"]
+offset_left = 133.0
+offset_top = 73.0
+offset_right = 173.0
+offset_bottom = 96.0
+pivot_offset = Vector2(-216, 41)
+text = "10"
+
 [node name="PoiseIcon" type="Sprite2D" parent="GameScreen/PlayerCharacter"]
 position = Vector2(118, 38)
 texture = ExtResource("5_uqpks")
+
+[node name="BoltsIcon" type="Sprite2D" parent="GameScreen/PlayerCharacter"]
+position = Vector2(118, 62)
+texture = ExtResource("10_j1nyc")
+
+[node name="BulletsIcon" type="Sprite2D" parent="GameScreen/PlayerCharacter"]
+position = Vector2(118, 86)
+texture = ExtResource("11_ee2ij")
 
 [node name="EnemyCharacter" type="Node2D" parent="GameScreen"]
 script = ExtResource("2_pg0s2")
@@ -111,6 +140,18 @@ text = "10"
 [node name="PoiseIcon" type="Sprite2D" parent="GameScreen/EnemyCharacter"]
 position = Vector2(329, 117)
 texture = ExtResource("5_uqpks")
+
+[node name="PinnedAmount" type="Label" parent="GameScreen/EnemyCharacter"]
+offset_left = 433.0
+offset_top = 143.0
+offset_right = 473.0
+offset_bottom = 166.0
+text = "10"
+
+[node name="PinnedIcon" type="Sprite2D" parent="GameScreen/EnemyCharacter"]
+position = Vector2(423, 155)
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("12_80jgp")
 
 [node name="AIState" type="Label" parent="GameScreen/EnemyCharacter"]
 offset_left = 376.0

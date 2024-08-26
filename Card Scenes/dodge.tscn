@@ -11,7 +11,7 @@ script = ExtResource("1_cf46e")
 
 [node name="Card" parent="." instance=ExtResource("1_6kq71")]
 card_name = "Dodge"
-card_description = "Regain 3 poise"
+card_description = "Regain 2 poise"
 card_cost = 0
 card_image = ExtResource("3_21wlt")
 

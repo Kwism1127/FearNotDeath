@@ -1,0 +1,27 @@
+[gd_scene load_steps=7 format=3 uid="uid://nukbrjo0sg7y"]
+
+[ext_resource type="Script" path="res://Card Scenes/complete_card.gd" id="1_4y740"]
+[ext_resource type="PackedScene" uid="uid://c5unkrxf8u18p" path="res://card.tscn" id="2_ojk8r"]
+[ext_resource type="Texture2D" uid="uid://d4dh4nd5pem3" path="res://Assets/arrow_cost_icon.png" id="3_pku3s"]
+[ext_resource type="Texture2D" uid="uid://btb0cnd8iqij3" path="res://Assets/pin_art.png" id="4_p5kj0"]
+[ext_resource type="Texture2D" uid="uid://41tvq47kla0v" path="res://Assets/ranger_card_base.png" id="5_xxj6n"]
+[ext_resource type="Script" path="res://Scripts/pin_action.gd" id="6_8tugs"]
+
+[node name="Pin" type="Node2D"]
+scale = Vector2(0.5, 0.5)
+script = ExtResource("1_4y740")
+
+[node name="Card" parent="." instance=ExtResource("2_ojk8r")]
+card_name = "Pin"
+card_description = "Deal 3 Damage, 50% chance to give the target 1 \"pinned\""
+card_cost = 1
+card_cost_resource = ExtResource("3_pku3s")
+card_image = ExtResource("4_p5kj0")
+card_background = ExtResource("5_xxj6n")
+card_type = "Bolts"
+
+[node name="Function" type="Node2D" parent="."]
+script = ExtResource("6_8tugs")
+
+[connection signal="mouse_entered" from="Card" to="." method="_on_card_mouse_entered"]
+[connection signal="mouse_exited" from="Card" to="." method="_on_card_mouse_exited"]

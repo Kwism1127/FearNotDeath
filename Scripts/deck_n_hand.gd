@@ -6,6 +6,10 @@ signal card_activated(_card: Complete_Card)
 
 @onready var strike_card: PackedScene = preload("res://Card Scenes/strike.tscn")
 @onready var dodge_card: PackedScene = preload("res://Card Scenes/dodge.tscn")
+@onready var pin_card: PackedScene = preload("res://Card Scenes/pin.tscn")
+@onready var rip_out_card: PackedScene = preload("res://Card Scenes/rip_out.tscn")
+@onready var fire_card: PackedScene = preload("res://Card Scenes/fire.tscn")
+
 @onready var hand: Hand = $Hand
 
 func remove_card_by_entity(_card: Node2D):
@@ -50,7 +54,25 @@ func return_copy(_card: Complete_Card) -> Complete_Card:
 		return _copy
 	else:
 		_copy.queue_free()
-		
+	
+	_copy = pin_card.instantiate()
+	if _copy.get_cost() == _card.get_cost():
+		return _copy
+	else:
+		_copy.queue_free()
+	
+	_copy = rip_out_card.instantiate()
+	if _copy.get_cost() == _card.get_cost():
+		return _copy
+	else:
+		_copy.queue_free()
+	
+	_copy = fire_card.instantiate()
+	if _copy.get_cost() == _card.get_cost():
+		return _copy
+	else:
+		_copy.queue_free()
+	
 	_copy = strike_card.instantiate()
 	return _copy
 
@@ -66,7 +88,25 @@ func return_cousin(_card: IDCard) -> Complete_Card:
 		return _copy
 	else:
 		_copy.queue_free()
+	
+	_copy = pin_card.instantiate()
+	if _copy.get_cost() == _card.card.get_cost():
+		return _copy
+	else:
+		_copy.queue_free()
 		
+	_copy = rip_out_card.instantiate()
+	if _copy.get_cost() == _card.card.get_cost():
+		return _copy
+	else:
+		_copy.queue_free()
+	
+	_copy = fire_card.instantiate()
+	if _copy.get_cost() == _card.card.get_cost():
+		return _copy
+	else:
+		_copy.queue_free()
+	
 	_copy = strike_card.instantiate()
 	return _copy
 

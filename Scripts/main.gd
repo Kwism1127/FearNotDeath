@@ -19,14 +19,37 @@ func _ready():
 	var _card
 	
 	var _i = 0
-	while _i < 10:
+	while _i < 6:
 		$CanvasLayer/DeckViewer.clear_display()
 		_card = $DeckNHand.strike_card.instantiate()
 		deck.add_card(_card)
 		_i += 1
-	while _i >= 10 && _i < 20:
+	
+	_i = 0
+	while _i < 6:
 		$CanvasLayer/DeckViewer.clear_display()
 		_card = $DeckNHand.dodge_card.instantiate()
+		deck.add_card(_card)
+		_i += 1
+	
+	_i = 0
+	while _i < 3:
+		$CanvasLayer/DeckViewer.clear_display()
+		_card = $DeckNHand.pin_card.instantiate()
+		deck.add_card(_card)
+		_i += 1
+	
+	_i = 0
+	while _i < 3:
+		$CanvasLayer/DeckViewer.clear_display()
+		_card = $DeckNHand.rip_out_card.instantiate()
+		deck.add_card(_card)
+		_i += 1
+	
+	_i = 0
+	while _i < 2:
+		$CanvasLayer/DeckViewer.clear_display()
+		_card = $DeckNHand.fire_card.instantiate()
 		deck.add_card(_card)
 		_i += 1
 	
@@ -38,7 +61,12 @@ func restart_game():
 	game_manager.current_state = Game_Manager.GameState.PLAYER_TURN
 	$GameScreen/PlayerCharacter.reset()
 	$GameScreen/EnemyCharacter.reset()
+	$DeckNHand.send_hand_to_pile(discard_pile)
+	for card in discard_pile.get_cards():
+		deck.add_card(card.card)
+		discard_pile.clear()
 	$DeckNHand.reset()
+	$DeckNHand.draw_from_pile(deck, 4)
 	
 	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -47,6 +75,8 @@ func _process(_delta):
 		return
 	
 	$GameScreen/PlayerCharacter/PoiseAmount.set_text(str($GameScreen/PlayerCharacter.poise))
+	$GameScreen/PlayerCharacter/BoltsAmount.set_text(str($GameScreen/PlayerCharacter.bolts))
+	$GameScreen/PlayerCharacter/BulletsAmount.set_text(str($GameScreen/PlayerCharacter.bullets))
 	
 	if $GameScreen/PlayerCharacter.current_hp <= 0:
 		game_manager.current_state = Game_Manager.GameState.GAMEOVER
@@ -62,17 +92,25 @@ func _process(_delta):
 		$GameScreen/EnemyCharacter/PoiseAmount.visible = false
 		$GameScreen/EnemyCharacter/PoiseIcon.visible = false
 	
+	if $GameScreen/EnemyCharacter.pins > 0:
+		$GameScreen/EnemyCharacter/PinnedAmount.visible = true
+		$GameScreen/EnemyCharacter/PinnedIcon.visible = true
+		$GameScreen/EnemyCharacter/PinnedAmount.set_text(str($GameScreen/EnemyCharacter.pins))
+	else: 
+		$GameScreen/EnemyCharacter/PinnedAmount.visible = false
+		$GameScreen/EnemyCharacter/PinnedIcon.visible = false
+	
 	$GameScreen/EnemyCharacter/AIState.set_text(str(enemy_state))
 	if game_manager.current_state == Game_Manager.GameState.ENEMY_TURN:
 		if enemy_state == 0:
-			$GameScreen/EnemyCharacter.gain_poise(3)
+			$GameScreen/EnemyCharacter.gain_poise(4)
 		elif enemy_state == 1:
 			$GameScreen/EnemyCharacter.gain_poise(1)
-			$GameScreen/PlayerCharacter.take_damage(1)
+			$GameScreen/PlayerCharacter.take_damage(2)
 		elif enemy_state == 2:
 			if $GameScreen/EnemyCharacter.poise >= 2:
 				$GameScreen/EnemyCharacter.spend_poise(2)
-				$GameScreen/PlayerCharacter.take_damage(5)
+				$GameScreen/PlayerCharacter.take_damage(6)
 		
 		#random behavior
 		#enemy_state = randi_range(0,2)
@@ -82,9 +120,11 @@ func _process(_delta):
 		if deck.get_cards().size() > 0:
 			$DeckNHand.draw_from_pile(deck, 4)
 		else:
-			deck = discard_pile
+			for card in discard_pile.get_cards():
+				deck.add_card(card.card)
 			discard_pile.clear()
 			$DeckNHand.draw_from_pile(deck, 4)
+		$GameScreen/PlayerCharacter.gain_poise(2)
 	
 	if game_manager.current_state == Game_Manager.GameState.VICTORY:
 		$CanvasLayer/VICTORY.visible = true

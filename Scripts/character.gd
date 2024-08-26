@@ -10,12 +10,14 @@ class_name Character extends Node2D
 @onready var poise: int = base_poise
 @onready var bullets: int = starting_bullets
 @onready var bolts: int = starting_bolts
+@onready var pins: int = 0
 
 func reset():
 	current_hp = max_hp
 	poise = base_poise
 	bullets = starting_bullets
 	bolts = starting_bolts
+	pins = 0
 	
 
 func set_hp(_max: int, _current: int):
@@ -30,6 +32,15 @@ func update_hpbar():
 
 func spend_poise(_amount: int):
 	poise -= _amount
+	
+func spend_bolt(_amount: int):
+	bolts -= _amount
+
+func spend_bullet(_amount: int):
+	bullets -= _amount
+
+func pin(_amount: int):
+	pins += _amount
 
 func gain_poise(_amount: int):
 	poise += _amount 
@@ -43,10 +54,6 @@ func take_damage(_amount: int):
 		var _damage: int = _amount - poise
 		poise = 0
 		current_hp -= _damage
-
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	pass # Replace with function body.
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
