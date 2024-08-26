@@ -4,7 +4,8 @@ class_name Character extends Node2D
 @export var max_hp: int = 10
 @export var base_poise: int = 5
 @export var starting_bullets: int = 3
-@export var starting_bolts: int = 3  
+@export var starting_bolts: int = 3 
+
 
 @onready var current_hp: int = max_hp
 @onready var poise: int = base_poise
@@ -55,6 +56,15 @@ func take_damage(_amount: int):
 		poise = 0
 		current_hp -= _damage
 
+func enemy_attack_animation() -> Vector2:
+	var starting_pos: Vector2 = $Sprite.global_position
+	var move: Vector2 = Vector2(starting_pos.x - 10, starting_pos.y + 5)
+	$Sprite.global_position = move
+	
+	return starting_pos
+
+func reset_pos(_starting_pos: Vector2):
+	$Sprite.global_position = _starting_pos
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):

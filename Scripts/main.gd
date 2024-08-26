@@ -12,6 +12,8 @@ extends Node2D
 var enemy_state: int = 0
 var deck_viewer_toggle: int = 0
 var discard_viewer_toggle: int = 0
+var wait: float = .25
+var position_holder: Vector2 = Vector2(0,0)
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -99,7 +101,10 @@ func _process(_delta):
 	else: 
 		$GameScreen/EnemyCharacter/PinnedAmount.visible = false
 		$GameScreen/EnemyCharacter/PinnedIcon.visible = false
-	
+
+#---------------------------------------------------------------------------------------------------
+#enemy action
+
 	$GameScreen/EnemyCharacter/AIState.set_text(str(enemy_state))
 	if game_manager.current_state == Game_Manager.GameState.ENEMY_TURN:
 		if enemy_state == 0:
@@ -107,11 +112,16 @@ func _process(_delta):
 		elif enemy_state == 1:
 			$GameScreen/EnemyCharacter.gain_poise(1)
 			$GameScreen/PlayerCharacter.take_damage(2)
+			$CanvasLayer/PlayerDamaged.visible = true
+			position_holder = $GameScreen/EnemyCharacter.enemy_attack_animation()
+			$CanvasLayer/PlayerDamaged/Holder.start(wait)
 		elif enemy_state == 2:
 			if $GameScreen/EnemyCharacter.poise >= 2:
 				$GameScreen/EnemyCharacter.spend_poise(2)
 				$GameScreen/PlayerCharacter.take_damage(6)
-		
+				$CanvasLayer/PlayerDamaged.visible = true
+				position_holder = $GameScreen/EnemyCharacter.enemy_attack_animation()
+				$CanvasLayer/PlayerDamaged/Holder.start(wait)
 		#random behavior
 		#enemy_state = randi_range(0,2)
 		#cyclical behavior
@@ -125,7 +135,9 @@ func _process(_delta):
 			discard_pile.clear()
 			$DeckNHand.draw_from_pile(deck, 4)
 		$GameScreen/PlayerCharacter.gain_poise(2)
-	
+
+#---------------------------------------------------------------------------------------------------
+
 	if game_manager.current_state == Game_Manager.GameState.VICTORY:
 		$CanvasLayer/VICTORY.visible = true
 	else:
@@ -242,3 +254,8 @@ func _on_quit_pressed():
 	get_tree().quit()
 
 
+
+
+func _on_holder_timeout():
+	$CanvasLayer/PlayerDamaged.visible = false
+	$GameScreen/EnemyCharacter.reset_pos(position_holder)
