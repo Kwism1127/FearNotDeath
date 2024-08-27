@@ -20,4 +20,4 @@ func _input(event):
 			background_contorl_array[background_index].visible = true
 			text_control_array[background_index][text_index].visible = true
 		else:
-			get_tree().change_scene_to_file("res://main.tscn")
+			get_tree().change_scene_to_file("res://path_selector.tscn")

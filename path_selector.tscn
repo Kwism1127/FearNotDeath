@@ -1,0 +1,113 @@
+[gd_scene load_steps=15 format=3 uid="uid://b8kknmfkw12d5"]
+
+[ext_resource type="Texture2D" uid="uid://cksw0lxl58d0g" path="res://Assets/combat_event.png" id="1_77lxd"]
+[ext_resource type="Script" path="res://Scripts/path_selector.gd" id="1_qn1cm"]
+[ext_resource type="Texture2D" uid="uid://dpb20v7hxgqq3" path="res://Assets/combat_event_pressed.png" id="2_7eefs"]
+[ext_resource type="Texture2D" uid="uid://bsbgw0rcdtnis" path="res://Assets/combat_event_hovered.png" id="3_6ukth"]
+[ext_resource type="Texture2D" uid="uid://bkt63h367l7lf" path="res://Assets/combat_event_disabled.png" id="4_0nyjl"]
+[ext_resource type="Texture2D" uid="uid://bbjsmn5a6vjcr" path="res://Assets/event_event.png" id="4_bfb0c"]
+[ext_resource type="Texture2D" uid="uid://c8yy7x8yhawcq" path="res://Assets/event_event_pressed.png" id="5_38ljp"]
+[ext_resource type="Texture2D" uid="uid://bojcr6efeneym" path="res://Assets/event_event_hovered.png" id="6_wn03g"]
+[ext_resource type="Texture2D" uid="uid://blh15f5ommwpu" path="res://Assets/event_event_disabled.png" id="8_b86ih"]
+[ext_resource type="PackedScene" uid="uid://b8k1w4t6w77b8" path="res://UI Scenes/menu_overlay.tscn" id="10_et2pe"]
+[ext_resource type="Texture2D" uid="uid://doqpecs5mmrkt" path="res://Assets/menu_button.png" id="11_x43wl"]
+[ext_resource type="Texture2D" uid="uid://c0bekly0m40gp" path="res://Assets/menu_button_pressed.png" id="12_liqjq"]
+[ext_resource type="Texture2D" uid="uid://de8fyej7jwjju" path="res://Assets/menu_button_hovered.png" id="13_4t3ff"]
+[ext_resource type="AudioStream" uid="uid://1f88j88ewjnj" path="res://Assets/Music/Night of Chaos.mp3" id="14_apk5b"]
+
+[node name="PathSelector" type="Node2D"]
+script = ExtResource("1_qn1cm")
+
+[node name="Background" type="ColorRect" parent="."]
+offset_right = 640.0
+offset_bottom = 360.0
+color = Color(0.446777, 0.446777, 0.446777, 1)
+
+[node name="Path" type="Line2D" parent="."]
+points = PackedVector2Array(173, 95, 255, 241)
+default_color = Color(0, 0, 0, 1)
+
+[node name="Path2" type="Line2D" parent="."]
+points = PackedVector2Array(502, 162, 255, 241)
+default_color = Color(0, 0, 0, 1)
+
+[node name="Event1" type="TextureButton" parent="."]
+offset_left = 147.0
+offset_top = 71.0
+offset_right = 275.0
+offset_bottom = 199.0
+scale = Vector2(0.4, 0.4)
+texture_normal = ExtResource("1_77lxd")
+texture_pressed = ExtResource("2_7eefs")
+texture_hover = ExtResource("3_6ukth")
+texture_disabled = ExtResource("4_0nyjl")
+
+[node name="Event2" type="TextureButton" parent="."]
+offset_left = 231.0
+offset_top = 214.0
+offset_right = 359.0
+offset_bottom = 342.0
+scale = Vector2(0.4, 0.4)
+texture_normal = ExtResource("4_bfb0c")
+texture_pressed = ExtResource("5_38ljp")
+texture_hover = ExtResource("6_wn03g")
+texture_disabled = ExtResource("8_b86ih")
+
+[node name="Event3" type="TextureButton" parent="."]
+offset_left = 476.0
+offset_top = 136.0
+offset_right = 604.0
+offset_bottom = 264.0
+scale = Vector2(0.4, 0.4)
+texture_normal = ExtResource("1_77lxd")
+texture_pressed = ExtResource("2_7eefs")
+texture_hover = ExtResource("3_6ukth")
+texture_disabled = ExtResource("4_0nyjl")
+
+[node name="Defocus" type="ColorRect" parent="."]
+visible = false
+offset_right = 639.0
+offset_bottom = 359.0
+color = Color(0, 0, 0, 0.878431)
+
+[node name="GameEnd" type="Label" parent="Defocus"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -155.0
+offset_top = -24.5
+offset_right = 155.0
+offset_bottom = 24.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "That's all for now,
+thank you for playing!"
+horizontal_alignment = 1
+
+[node name="UI" type="CanvasLayer" parent="."]
+
+[node name="MenuOverlay" parent="UI" instance=ExtResource("10_et2pe")]
+
+[node name="MenuToggle" type="TextureButton" parent="UI"]
+offset_left = 7.0
+offset_top = 314.0
+offset_right = 135.0
+offset_bottom = 442.0
+scale = Vector2(0.25, 0.25)
+texture_normal = ExtResource("11_x43wl")
+texture_pressed = ExtResource("12_liqjq")
+texture_hover = ExtResource("13_4t3ff")
+
+[node name="Music" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("14_apk5b")
+autoplay = true
+
+[connection signal="pressed" from="Event1" to="." method="_on_event_1_pressed"]
+[connection signal="pressed" from="Event2" to="." method="_on_event_2_pressed"]
+[connection signal="pressed" from="Event3" to="." method="_on_event_3_pressed"]
+[connection signal="quit_pressed" from="UI/MenuOverlay" to="." method="_on_menu_overlay_quit_pressed"]
+[connection signal="return_2_menu_pressed" from="UI/MenuOverlay" to="." method="_on_menu_overlay_return_2_menu_pressed"]
+[connection signal="pressed" from="UI/MenuToggle" to="." method="_on_menu_toggle_pressed"]

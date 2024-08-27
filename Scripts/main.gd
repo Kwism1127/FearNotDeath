@@ -240,23 +240,24 @@ func _on_menu_button_pressed():
 	$CanvasLayer/MenuOverlay.visible = !$CanvasLayer/MenuOverlay.visible
 	game_manager.is_running = !game_manager.is_running
 
+func _on_holder_timeout():
+	$CanvasLayer/PlayerDamaged.visible = false
+	$GameScreen/EnemyCharacter.reset_pos(position_holder)
 
-func _on_restart_pressed():
+
+func _on_return_to_selector_pressed():
+	get_tree().change_scene_to_file("res://path_selector.tscn")
+
+
+func _on_menu_overlay_quit_pressed():
+	get_tree().quit()
+
+
+func _on_menu_overlay_restart_pressed():
 	$CanvasLayer/GAMEOVER.visible = false
 	$CanvasLayer/VICTORY.visible = false
 	restart_game()
 
 
-func _on_return_2_menu_pressed():
+func _on_menu_overlay_return_2_menu_pressed():
 	get_tree().change_scene_to_file("res://UI Scenes/main_menu.tscn")
-
-
-func _on_quit_pressed():
-	get_tree().quit()
-
-
-
-
-func _on_holder_timeout():
-	$CanvasLayer/PlayerDamaged.visible = false
-	$GameScreen/EnemyCharacter.reset_pos(position_holder)

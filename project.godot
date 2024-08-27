@@ -15,6 +15,10 @@ run/main_scene="res://UI Scenes/main_menu.tscn"
 config/features=PackedStringArray("4.2", "Forward Plus")
 config/icon="res://icon.svg"
 
+[autoload]
+
+Recorder="*res://Scripts/Singletons/recorder.gd"
+
 [display]
 
 window/size/viewport_width=640

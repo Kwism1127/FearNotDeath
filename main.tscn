@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=3 uid="uid://dnsora3lr0ro5"]
+[gd_scene load_steps=29 format=3 uid="uid://dnsora3lr0ro5"]
 
 [ext_resource type="PackedScene" uid="uid://c8uiuff7tftri" path="res://deck_n_hand.tscn" id="1_2eew1"]
 [ext_resource type="Script" path="res://Scripts/main.gd" id="1_x0rx3"]
@@ -20,7 +20,7 @@
 [ext_resource type="Texture2D" uid="uid://de8fyej7jwjju" path="res://Assets/menu_button_hovered.png" id="14_1kxwm"]
 [ext_resource type="Texture2D" uid="uid://bfhrvje0cfym6" path="res://Assets/discard_button.png" id="15_rtt5k"]
 [ext_resource type="Texture2D" uid="uid://6qpdenkpv3os" path="res://Assets/discard_button_pressed.png" id="16_770hj"]
-[ext_resource type="PackedScene" uid="uid://l0iktwkvf55o" path="res://UI Scenes/VolumeSlider.tscn" id="16_bxk1s"]
+[ext_resource type="PackedScene" uid="uid://b8k1w4t6w77b8" path="res://UI Scenes/menu_overlay.tscn" id="16_se7yu"]
 [ext_resource type="Texture2D" uid="uid://d1ee2qsvjcv2a" path="res://Assets/discard_button_hovered.png" id="17_nmlkw"]
 [ext_resource type="Texture2D" uid="uid://cn6ixlx26d755" path="res://Assets/player_damaged_screen_fx.png" id="18_fk1ia"]
 [ext_resource type="AudioStream" uid="uid://dt7xwecjb0ihf" path="res://Assets/Music/Chase Pulse Faster.mp3" id="24_t6v51"]
@@ -35,9 +35,6 @@ font_size = 32
 [sub_resource type="LabelSettings" id="LabelSettings_7qj3n"]
 font_size = 32
 font_color = Color(0, 0, 0, 1)
-
-[sub_resource type="LabelSettings" id="LabelSettings_tv1ij"]
-font_size = 25
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_x0rx3")
@@ -207,7 +204,6 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="VICTORY" type="ColorRect" parent="CanvasLayer"]
-visible = false
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -233,6 +229,15 @@ label_settings = SubResource("LabelSettings_7qj3n")
 horizontal_alignment = 1
 vertical_alignment = 1
 
+[node name="ReturnToSelector" type="Button" parent="CanvasLayer/VICTORY"]
+layout_mode = 0
+offset_left = 281.0
+offset_top = 214.0
+offset_right = 360.0
+offset_bottom = 245.0
+text = "Continue
+"
+
 [node name="DeckViewerBackground" type="ColorRect" parent="CanvasLayer"]
 visible = false
 anchors_preset = 8
@@ -251,65 +256,7 @@ color = Color(1, 1, 1, 0.439216)
 [node name="DeckViewer" parent="CanvasLayer" instance=ExtResource("11_ew7gk")]
 visible = false
 
-[node name="MenuOverlay" type="ColorRect" parent="CanvasLayer"]
-visible = false
-offset_right = 128.0
-offset_bottom = 360.0
-color = Color(0, 0, 0, 0.94902)
-
-[node name="PAUSED" type="Label" parent="CanvasLayer/MenuOverlay"]
-layout_mode = 0
-offset_left = 14.0
-offset_top = 4.0
-offset_right = 111.0
-offset_bottom = 42.0
-text = "PAUSED"
-label_settings = SubResource("LabelSettings_tv1ij")
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="Restart" type="Button" parent="CanvasLayer/MenuOverlay"]
-layout_mode = 0
-offset_left = 31.0
-offset_top = 125.0
-offset_right = 96.0
-offset_bottom = 156.0
-text = "Restart"
-
-[node name="Return2Menu" type="Button" parent="CanvasLayer/MenuOverlay"]
-layout_mode = 0
-offset_left = 27.0
-offset_top = 173.0
-offset_right = 100.0
-offset_bottom = 227.0
-text = "Return 
-to Menu"
-
-[node name="Quit" type="Button" parent="CanvasLayer/MenuOverlay"]
-layout_mode = 0
-offset_left = 28.0
-offset_top = 244.0
-offset_right = 93.0
-offset_bottom = 275.0
-text = "Quit
-"
-
-[node name="VolumeSlider" parent="CanvasLayer/MenuOverlay" instance=ExtResource("16_bxk1s")]
-layout_mode = 0
-offset_left = 15.0
-offset_top = 63.0
-offset_right = 121.0
-offset_bottom = 79.0
-bus_name = "Master"
-
-[node name="Volume" type="Label" parent="CanvasLayer/MenuOverlay/VolumeSlider"]
-layout_mode = 0
-offset_left = 19.0
-offset_top = 10.0
-offset_right = 78.0
-offset_bottom = 33.0
-text = "Volume
-"
+[node name="MenuOverlay" parent="CanvasLayer" instance=ExtResource("16_se7yu")]
 
 [node name="MenuButton" type="TextureButton" parent="CanvasLayer"]
 offset_left = 6.0
@@ -346,9 +293,10 @@ autoplay = true
 [connection signal="pressed" from="ShowDeck" to="." method="_on_show_deck_pressed"]
 [connection signal="card_activated" from="DeckNHand" to="." method="_on_deck_n_hand_card_activated"]
 [connection signal="pressed" from="EndTurnButton" to="." method="_on_end_turn_button_pressed"]
-[connection signal="pressed" from="CanvasLayer/MenuOverlay/Restart" to="." method="_on_restart_pressed"]
-[connection signal="pressed" from="CanvasLayer/MenuOverlay/Return2Menu" to="." method="_on_return_2_menu_pressed"]
-[connection signal="pressed" from="CanvasLayer/MenuOverlay/Quit" to="." method="_on_quit_pressed"]
+[connection signal="pressed" from="CanvasLayer/VICTORY/ReturnToSelector" to="." method="_on_return_to_selector_pressed"]
+[connection signal="quit_pressed" from="CanvasLayer/MenuOverlay" to="." method="_on_menu_overlay_quit_pressed"]
+[connection signal="restart_pressed" from="CanvasLayer/MenuOverlay" to="." method="_on_menu_overlay_restart_pressed"]
+[connection signal="return_2_menu_pressed" from="CanvasLayer/MenuOverlay" to="." method="_on_menu_overlay_return_2_menu_pressed"]
 [connection signal="pressed" from="CanvasLayer/MenuButton" to="." method="_on_menu_button_pressed"]
 [connection signal="timeout" from="CanvasLayer/PlayerDamaged/Holder" to="." method="_on_holder_timeout"]
 [connection signal="pressed" from="ShowDiscard" to="." method="_on_show_discard_pressed"]
