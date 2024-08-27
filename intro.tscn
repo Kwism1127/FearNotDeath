@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://dmpfvdj1ikfyw"]
+[gd_scene load_steps=3 format=3 uid="uid://dmpfvdj1ikfyw"]
 
 [ext_resource type="Script" path="res://Scripts/intro.gd" id="1_ve6uk"]
+[ext_resource type="AudioStream" uid="uid://b7r3vma10vdh8" path="res://Assets/Music/Symmetry.mp3" id="2_s317k"]
 
 [node name="Intro" type="Node2D"]
 script = ExtResource("1_ve6uk")
@@ -73,7 +74,7 @@ offset_left = 26.0
 offset_top = 159.0
 offset_right = 606.0
 offset_bottom = 326.0
-text = "The whisper became a scream. One that tore through all thoughts, leaving behind only pain, terror, and rage. That screamed drowned out all other voices until only one remained. Some stubborn woman from some backwater place that screamed herself for several days. It was a repeating message, a set of instructions of where and how to look. Where once there was only the void of space, now was a new star. A fell thing of shift colors that made your stomach twist and your heart pound."
+text = "The whisper became a scream. One that tore through all thoughts, leaving behind only pain, terror, and rage. That screamed drowned out all other voices until only one remained. Some stubborn woman from some backwater place that screamed herself for several days. It was a repeating message, a set of instructions of where and how to look. Where once there was only the void of space, now was a new star. A fell thing of shifting colors that made your stomach twist and your heart pound."
 
 [node name="Background3" type="ColorRect" parent="."]
 visible = false
@@ -99,3 +100,7 @@ offset_top = 138.0
 offset_right = 610.0
 offset_bottom = 288.0
 text = "It became clear that the Fell Star would fall in the wild reaches of your nation. The Emperor's advisors argued for entire days and sleepless nights over the merits and short fallings of every possible response, the multitude of which you are only vaguely aware of. Only one is truly known to you in its entirety. A member of the Imperial Guard will track the Fell Star to its landing place and learn what they can of its nature. You."
+
+[node name="Music" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_s317k")
+autoplay = true

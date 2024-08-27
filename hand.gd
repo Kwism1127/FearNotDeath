@@ -6,7 +6,7 @@ signal card_activated(_card: Complete_Card)
 @export var hand_radius: float = 200
 @export var card_angle: float = -90
 @export var angle_limit: float = 25
-@export var max_card_spread: float = 5
+@export var max_card_spread: float = 2.5
 
 @onready var test_card = $TestCard
 @onready var collision_shape: CollisionShape2D = $DebugShape

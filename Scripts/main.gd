@@ -21,14 +21,14 @@ func _ready():
 	var _card
 	
 	var _i = 0
-	while _i < 6:
+	while _i < 8:
 		$CanvasLayer/DeckViewer.clear_display()
 		_card = $DeckNHand.strike_card.instantiate()
 		deck.add_card(_card)
 		_i += 1
 	
 	_i = 0
-	while _i < 6:
+	while _i < 4:
 		$CanvasLayer/DeckViewer.clear_display()
 		_card = $DeckNHand.dodge_card.instantiate()
 		deck.add_card(_card)
@@ -108,7 +108,8 @@ func _process(_delta):
 	$GameScreen/EnemyCharacter/AIState.set_text(str(enemy_state))
 	if game_manager.current_state == Game_Manager.GameState.ENEMY_TURN:
 		if enemy_state == 0:
-			$GameScreen/EnemyCharacter.gain_poise(4)
+			if $GameScreen/EnemyCharacter.poise < 10:
+				$GameScreen/EnemyCharacter.gain_poise(3)
 		elif enemy_state == 1:
 			$GameScreen/EnemyCharacter.gain_poise(1)
 			$GameScreen/PlayerCharacter.take_damage(2)
@@ -134,7 +135,7 @@ func _process(_delta):
 				deck.add_card(card.card)
 			discard_pile.clear()
 			$DeckNHand.draw_from_pile(deck, 4)
-		$GameScreen/PlayerCharacter.gain_poise(2)
+		$GameScreen/PlayerCharacter.gain_poise(1)
 
 #---------------------------------------------------------------------------------------------------
 

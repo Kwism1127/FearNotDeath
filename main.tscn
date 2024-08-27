@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=3 uid="uid://dnsora3lr0ro5"]
+[gd_scene load_steps=30 format=3 uid="uid://dnsora3lr0ro5"]
 
 [ext_resource type="PackedScene" uid="uid://c8uiuff7tftri" path="res://deck_n_hand.tscn" id="1_2eew1"]
 [ext_resource type="Script" path="res://Scripts/main.gd" id="1_x0rx3"]
@@ -20,8 +20,10 @@
 [ext_resource type="Texture2D" uid="uid://de8fyej7jwjju" path="res://Assets/menu_button_hovered.png" id="14_1kxwm"]
 [ext_resource type="Texture2D" uid="uid://bfhrvje0cfym6" path="res://Assets/discard_button.png" id="15_rtt5k"]
 [ext_resource type="Texture2D" uid="uid://6qpdenkpv3os" path="res://Assets/discard_button_pressed.png" id="16_770hj"]
+[ext_resource type="PackedScene" uid="uid://l0iktwkvf55o" path="res://UI Scenes/VolumeSlider.tscn" id="16_bxk1s"]
 [ext_resource type="Texture2D" uid="uid://d1ee2qsvjcv2a" path="res://Assets/discard_button_hovered.png" id="17_nmlkw"]
 [ext_resource type="Texture2D" uid="uid://cn6ixlx26d755" path="res://Assets/player_damaged_screen_fx.png" id="18_fk1ia"]
+[ext_resource type="AudioStream" uid="uid://dt7xwecjb0ihf" path="res://Assets/Music/Chase Pulse Faster.mp3" id="24_t6v51"]
 
 [sub_resource type="Theme" id="Theme_ai874"]
 
@@ -135,7 +137,7 @@ theme = SubResource("Theme_6ly0b")
 theme_override_styles/fill = ExtResource("9_05rfj")
 max_value = 20.0
 step = 1.0
-value = 10.0
+value = 20.0
 show_percentage = false
 
 [node name="PoiseAmount" type="Label" parent="GameScreen/EnemyCharacter"]
@@ -269,17 +271,17 @@ vertical_alignment = 1
 [node name="Restart" type="Button" parent="CanvasLayer/MenuOverlay"]
 layout_mode = 0
 offset_left = 31.0
-offset_top = 61.0
+offset_top = 125.0
 offset_right = 96.0
-offset_bottom = 92.0
+offset_bottom = 156.0
 text = "Restart"
 
 [node name="Return2Menu" type="Button" parent="CanvasLayer/MenuOverlay"]
 layout_mode = 0
-offset_left = 26.0
-offset_top = 140.0
-offset_right = 99.0
-offset_bottom = 194.0
+offset_left = 27.0
+offset_top = 173.0
+offset_right = 100.0
+offset_bottom = 227.0
 text = "Return 
 to Menu"
 
@@ -290,6 +292,23 @@ offset_top = 244.0
 offset_right = 93.0
 offset_bottom = 275.0
 text = "Quit
+"
+
+[node name="VolumeSlider" parent="CanvasLayer/MenuOverlay" instance=ExtResource("16_bxk1s")]
+layout_mode = 0
+offset_left = 15.0
+offset_top = 63.0
+offset_right = 121.0
+offset_bottom = 79.0
+bus_name = "Master"
+
+[node name="Volume" type="Label" parent="CanvasLayer/MenuOverlay/VolumeSlider"]
+layout_mode = 0
+offset_left = 19.0
+offset_top = 10.0
+offset_right = 78.0
+offset_bottom = 33.0
+text = "Volume
 "
 
 [node name="MenuButton" type="TextureButton" parent="CanvasLayer"]
@@ -319,6 +338,10 @@ scale = Vector2(0.25, 0.25)
 texture_normal = ExtResource("15_rtt5k")
 texture_pressed = ExtResource("16_770hj")
 texture_hover = ExtResource("17_nmlkw")
+
+[node name="Music" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("24_t6v51")
+autoplay = true
 
 [connection signal="pressed" from="ShowDeck" to="." method="_on_show_deck_pressed"]
 [connection signal="card_activated" from="DeckNHand" to="." method="_on_deck_n_hand_card_activated"]

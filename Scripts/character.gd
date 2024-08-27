@@ -58,7 +58,7 @@ func take_damage(_amount: int):
 
 func enemy_attack_animation() -> Vector2:
 	var starting_pos: Vector2 = $Sprite.global_position
-	var move: Vector2 = Vector2(starting_pos.x - 10, starting_pos.y + 5)
+	var move: Vector2 = Vector2(starting_pos.x - 20, starting_pos.y + 7)
 	$Sprite.global_position = move
 	
 	return starting_pos

@@ -8,7 +8,8 @@ script = ExtResource("1_scnc1")
 
 [node name="Hand" parent="." instance=ExtResource("2_esfwl")]
 position = Vector2(320, 1300)
-max_card_spread = 2.5
+angle_limit = 60.0
+max_card_spread = 4.4
 
 [node name="CardSpawnTester0" type="Button" parent="."]
 visible = false
