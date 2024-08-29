@@ -18,6 +18,7 @@ config/icon="res://icon.svg"
 [autoload]
 
 Recorder="*res://Scripts/Singletons/recorder.gd"
+PlayerInv="*res://Scripts/Singletons/player_inv.gd"
 
 [display]
 

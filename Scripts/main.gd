@@ -141,6 +141,11 @@ func _process(_delta):
 
 	if game_manager.current_state == Game_Manager.GameState.VICTORY:
 		$CanvasLayer/VICTORY.visible = true
+		PlayerInv.set_max_hp($GameScreen/PlayerCharacter.max_hp)
+		PlayerInv.set_current_hp($GameScreen/PlayerCharacter.current_hp)
+		PlayerInv.set_bolts($GameScreen/PlayerCharacter.bolts)
+		PlayerInv.set_bullets($GameScreen/PlayerCharacter.bullets)
+		PlayerInv.set_starting_poise($GameScreen/PlayerCharacter.poise)
 	else:
 		$CanvasLayer/VICTORY.visible = false
 	
@@ -261,3 +266,7 @@ func _on_menu_overlay_restart_pressed():
 
 func _on_menu_overlay_return_2_menu_pressed():
 	get_tree().change_scene_to_file("res://UI Scenes/main_menu.tscn")
+
+
+func _on_kill_pressed():
+	$GameScreen/EnemyCharacter.take_damage(20)

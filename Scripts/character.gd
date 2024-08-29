@@ -13,6 +13,14 @@ class_name Character extends Node2D
 @onready var bolts: int = starting_bolts
 @onready var pins: int = 0
 
+func _ready():
+	if Recorder.get_progress() > 2:
+		max_hp += 7
+		current_hp += 7
+		pins -= 1
+		$Sprite.scale.x = .7
+		$Sprite.scale.y = .6
+
 func reset():
 	current_hp = max_hp
 	poise = base_poise

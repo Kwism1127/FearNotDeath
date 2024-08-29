@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=3 uid="uid://dnsora3lr0ro5"]
+[gd_scene load_steps=30 format=3 uid="uid://dnsora3lr0ro5"]
 
 [ext_resource type="PackedScene" uid="uid://c8uiuff7tftri" path="res://deck_n_hand.tscn" id="1_2eew1"]
 [ext_resource type="Script" path="res://Scripts/main.gd" id="1_x0rx3"]
@@ -7,6 +7,7 @@
 [ext_resource type="Script" path="res://Scripts/character.gd" id="2_pg0s2"]
 [ext_resource type="Texture2D" uid="uid://betqtwiihe121" path="res://Assets/biter.png" id="3_hc0yc"]
 [ext_resource type="Texture2D" uid="uid://drngv8orhpi1x" path="res://Assets/poise_cost_icon.png" id="5_uqpks"]
+[ext_resource type="Script" path="res://Scripts/player_character.gd" id="7_31qiq"]
 [ext_resource type="Texture2D" uid="uid://bi03t0rnkkm6s" path="res://Assets/collection_button.png" id="8_1bxhu"]
 [ext_resource type="StyleBox" uid="uid://oqelx6dgc66n" path="res://Assets/healthbar.tres" id="9_05rfj"]
 [ext_resource type="Texture2D" uid="uid://bgmklftx2t1pb" path="res://Assets/collection_button_pressed.png" id="9_8s1kr"]
@@ -57,9 +58,7 @@ script = ExtResource("2_8pcyo")
 [node name="GameScreen" type="Node2D" parent="."]
 
 [node name="PlayerCharacter" type="Node2D" parent="GameScreen"]
-script = ExtResource("2_pg0s2")
-base_poise = 3
-starting_bullets = 1
+script = ExtResource("7_31qiq")
 
 [node name="Portrait" type="Sprite2D" parent="GameScreen/PlayerCharacter"]
 position = Vector2(58, 55)
@@ -73,9 +72,8 @@ offset_right = 205.0
 offset_bottom = 23.0
 theme = SubResource("Theme_ai874")
 theme_override_styles/fill = ExtResource("9_05rfj")
-max_value = 10.0
+max_value = 0.0
 step = 1.0
-value = 10.0
 show_percentage = false
 
 [node name="PoiseAmount" type="Label" parent="GameScreen/PlayerCharacter"]
@@ -204,6 +202,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="VICTORY" type="ColorRect" parent="CanvasLayer"]
+visible = false
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -290,6 +289,14 @@ texture_hover = ExtResource("17_nmlkw")
 stream = ExtResource("24_t6v51")
 autoplay = true
 
+[node name="kill" type="Button" parent="."]
+visible = false
+offset_left = 606.0
+offset_top = 1.0
+offset_right = 637.0
+offset_bottom = 32.0
+text = "kill"
+
 [connection signal="pressed" from="ShowDeck" to="." method="_on_show_deck_pressed"]
 [connection signal="card_activated" from="DeckNHand" to="." method="_on_deck_n_hand_card_activated"]
 [connection signal="pressed" from="EndTurnButton" to="." method="_on_end_turn_button_pressed"]
@@ -300,3 +307,4 @@ autoplay = true
 [connection signal="pressed" from="CanvasLayer/MenuButton" to="." method="_on_menu_button_pressed"]
 [connection signal="timeout" from="CanvasLayer/PlayerDamaged/Holder" to="." method="_on_holder_timeout"]
 [connection signal="pressed" from="ShowDiscard" to="." method="_on_show_discard_pressed"]
+[connection signal="pressed" from="kill" to="." method="_on_kill_pressed"]

@@ -6,7 +6,9 @@ Known Issues:
 
 	There is a larger memory leak related to opening and closing the deck viewer
 	and discard pile viewer, DO NOT OPEN AND CLOSE THE VIEWERS CONTINUOUSLY.
-	regular use of the viewers should not cause noticeable issues. 
+	regular use of the viewers should not cause noticeable issues.
+
+	The player will not automatically recover pinned bolts at the end of combat.
 
 MIT License:
 	This game uses Godot Engine, available under the following license:
