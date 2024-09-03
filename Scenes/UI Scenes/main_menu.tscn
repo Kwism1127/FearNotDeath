@@ -1,0 +1,148 @@
+[gd_scene load_steps=8 format=3 uid="uid://yvhasrpynarl"]
+
+[ext_resource type="Script" path="res://Scripts/main_menu.gd" id="1_3fm60"]
+[ext_resource type="Texture2D" uid="uid://csf3y16yien5x" path="res://Sprites/Misc/GODOT_monochrome_logo.png" id="2_li10w"]
+[ext_resource type="PackedScene" uid="uid://l0iktwkvf55o" path="res://Scenes/UI Scenes/VolumeSlider.tscn" id="3_tehhi"]
+[ext_resource type="AudioStream" uid="uid://1f88j88ewjnj" path="res://Audio/Music/Night of Chaos.mp3" id="4_54bwm"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_d0rq7"]
+font_size = 40
+font_color = Color(0.436058, 8.66354e-07, 1.68458e-07, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_2bpob"]
+font_size = 10
+
+[sub_resource type="LabelSettings" id="LabelSettings_37mnt"]
+font_size = 8
+
+[node name="Menu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_3fm60")
+
+[node name="Background" type="ColorRect" parent="."]
+layout_mode = 0
+offset_right = 640.0
+offset_bottom = 360.0
+color = Color(0, 0, 0, 1)
+
+[node name="Title" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -320.0
+offset_top = -180.0
+offset_right = 320.0
+offset_bottom = 180.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Fear Not Death"
+label_settings = SubResource("LabelSettings_d0rq7")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Start" type="Button" parent="."]
+layout_mode = 0
+offset_left = 241.0
+offset_top = 216.0
+offset_right = 287.0
+offset_bottom = 247.0
+text = "Start"
+
+[node name="Quit" type="Button" parent="."]
+layout_mode = 0
+offset_left = 343.0
+offset_top = 216.0
+offset_right = 385.0
+offset_bottom = 247.0
+text = "Quit
+"
+
+[node name="CreditsToggle" type="Button" parent="."]
+layout_mode = 0
+offset_left = 571.0
+offset_top = 325.0
+offset_right = 634.0
+offset_bottom = 356.0
+text = "Credits
+"
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = 262.0
+offset_top = 306.0
+offset_right = 2795.0
+offset_bottom = 1330.0
+scale = Vector2(0.04, 0.04)
+texture = ExtResource("2_li10w")
+
+[node name="MadeWith" type="Label" parent="."]
+layout_mode = 0
+offset_left = 306.0
+offset_top = 303.0
+offset_right = 390.0
+offset_bottom = 326.0
+text = "Made With"
+label_settings = SubResource("LabelSettings_2bpob")
+
+[node name="Credits" type="ColorRect" parent="."]
+visible = false
+layout_mode = 0
+offset_right = 640.0
+offset_bottom = 302.0
+color = Color(0, 0, 0, 1)
+
+[node name="Credits" type="Label" parent="Credits"]
+layout_mode = 0
+offset_left = 7.0
+offset_top = 6.0
+offset_right = 245.0
+offset_bottom = 93.0
+text = "Koby Woytowicz
+Designer, Programmer & Artist
+
+Music
+\"Symmetry\" Kevin MacLeod (incompetech.com)
+Licensed under Creative Commons: By Attribution 4.0 License
+http://creativecommons.org/licenses/by/4.0/
+
+\"Night of Chaos\" Kevin MacLeod (incompetech.com)
+Licensed under Creative Commons: By Attribution 4.0 License
+http://creativecommons.org/licenses/by/4.0/
+
+\"Chase Pulse Faster\" Kevin MacLeod (incompetech.com)
+Licensed under Creative Commons: By Attribution 4.0 License
+http://creativecommons.org/licenses/by/4.0/"
+label_settings = SubResource("LabelSettings_37mnt")
+horizontal_alignment = 1
+
+[node name="VolumeSlider" parent="." instance=ExtResource("3_tehhi")]
+layout_mode = 0
+offset_left = 445.0
+offset_top = 10.0
+offset_right = 631.0
+offset_bottom = 26.0
+bus_name = "Master"
+
+[node name="Volume" type="Label" parent="VolumeSlider"]
+layout_mode = 0
+offset_left = 62.0
+offset_top = 11.0
+offset_right = 121.0
+offset_bottom = 34.0
+text = "Volume"
+
+[node name="MainTheme" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_54bwm")
+autoplay = true
+
+[connection signal="pressed" from="Start" to="." method="_on_start_pressed"]
+[connection signal="pressed" from="Quit" to="." method="_on_quit_pressed"]
+[connection signal="pressed" from="CreditsToggle" to="." method="_on_credits_toggle_pressed"]

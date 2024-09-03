@@ -1,4 +1,4 @@
-@tool
+#@tool
 class_name PlayerCharacter extends Node2D
 
 @onready var import_max_hp: int = PlayerInv.get_max_hp()
