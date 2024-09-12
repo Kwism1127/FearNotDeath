@@ -1,0 +1,37 @@
+[gd_scene load_steps=2 format=3 uid="uid://c8uiuff7tftri"]
+
+[ext_resource type="PackedScene" uid="uid://kfrgnsxstn2i" path="res://Old Files/Scenes/hand.tscn" id="2_esfwl"]
+
+[node name="DeckNHand" type="Node2D"]
+
+[node name="Hand" parent="." instance=ExtResource("2_esfwl")]
+position = Vector2(320, 1300)
+script = null
+
+[node name="CardSpawnTester0" type="Button" parent="."]
+visible = false
+offset_left = 486.0
+offset_top = 2.0
+offset_right = 635.0
+offset_bottom = 33.0
+text = "Create Strike Card"
+
+[node name="CardSpawnTester1" type="Button" parent="."]
+visible = false
+offset_left = 482.0
+offset_top = 35.0
+offset_right = 636.0
+offset_bottom = 66.0
+text = "Create Dodge Card"
+
+[node name="Card Destroyer" type="Button" parent="."]
+visible = false
+offset_left = 524.0
+offset_top = 67.0
+offset_right = 635.0
+offset_bottom = 98.0
+text = "Remove Card"
+
+[connection signal="pressed" from="CardSpawnTester0" to="." method="_on_card_spawn_tester_0_pressed"]
+[connection signal="pressed" from="CardSpawnTester1" to="." method="_on_card_spawn_tester_1_pressed"]
+[connection signal="pressed" from="Card Destroyer" to="." method="_on_card_destroyer_pressed"]

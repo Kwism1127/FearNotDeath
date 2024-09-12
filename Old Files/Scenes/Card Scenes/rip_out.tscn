@@ -1,0 +1,14 @@
+[gd_scene load_steps=4 format=3 uid="uid://bi223pj0x8f8s"]
+
+[ext_resource type="Script" path="res://Old Files/Scenes/Card Scenes/complete_card.gd" id="1_jeqfm"]
+[ext_resource type="PackedScene" uid="uid://c5unkrxf8u18p" path="res://Old Files/Scenes/card.tscn" id="2_2eclo"]
+[ext_resource type="Script" path="res://Old Files/Scripts/rip_out_action.gd" id="5_uxgx0"]
+
+[node name="RipOut" type="Node2D"]
+scale = Vector2(0.5, 0.5)
+script = ExtResource("1_jeqfm")
+
+[node name="Card" parent="." instance=ExtResource("2_2eclo")]
+
+[node name="Function" type="Node2D" parent="."]
+script = ExtResource("5_uxgx0")

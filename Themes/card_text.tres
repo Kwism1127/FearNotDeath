@@ -1,0 +1,7 @@
+[gd_resource type="Theme" load_steps=2 format=3 uid="uid://dyajk4wpyrm0y"]
+
+[ext_resource type="FontFile" uid="uid://bdf0ufa2wclnr" path="res://Themes/Fonts/Cent Schlbk Bold.TTF" id="1_cu0jd"]
+
+[resource]
+default_font = ExtResource("1_cu0jd")
+default_font_size = 12

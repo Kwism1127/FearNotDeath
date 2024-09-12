@@ -1,0 +1,73 @@
+[gd_scene load_steps=9 format=3 uid="uid://4jaeskbeshax"]
+
+[ext_resource type="Script" path="res://Scripts/Classes/card_base.gd" id="1_7xld3"]
+[ext_resource type="Texture2D" uid="uid://ckhrm1kakgtag" path="res://Sprites/Card Assets/Card Bases/duelist_card_base.png" id="1_vspwf"]
+[ext_resource type="Texture2D" uid="uid://bedleecnra4hf" path="res://Sprites/Card Assets/Card Art/strike_art.png" id="2_8bueh"]
+[ext_resource type="Theme" uid="uid://dyajk4wpyrm0y" path="res://Themes/card_text.tres" id="3_lkssb"]
+[ext_resource type="Theme" uid="uid://jxnvkqqcnwjr" path="res://Themes/card_title.tres" id="4_87f7m"]
+[ext_resource type="Texture2D" uid="uid://drngv8orhpi1x" path="res://Sprites/Card Assets/Icons/poise_cost_icon.png" id="5_arkmu"]
+[ext_resource type="Texture2D" uid="uid://bcye85aduu70y" path="res://Sprites/Card Assets/Icons/energy_cost_icon.png" id="6_jsaui"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_guy1y"]
+size = Vector2(162, 234)
+
+[node name="CardBase" type="Node2D"]
+position = Vector2(113, 141)
+script = ExtResource("1_7xld3")
+
+[node name="BaseSprite" type="Sprite2D" parent="."]
+texture = ExtResource("1_vspwf")
+
+[node name="CardArt" type="Sprite2D" parent="."]
+texture = ExtResource("2_8bueh")
+
+[node name="CardText" type="RichTextLabel" parent="."]
+offset_left = -71.0
+offset_top = 7.0
+offset_right = 72.0
+offset_bottom = 108.0
+theme = ExtResource("3_lkssb")
+text = "Deal 2 melee damage"
+metadata/_edit_use_anchors_ = true
+
+[node name="CardTitle" type="RichTextLabel" parent="."]
+offset_left = -75.0
+offset_top = -114.0
+offset_right = 27.0
+offset_bottom = -92.0
+theme = ExtResource("4_87f7m")
+text = "Strike"
+metadata/_edit_use_anchors_ = true
+
+[node name="Cost" type="Node2D" parent="."]
+
+[node name="SecondaryResource" type="Sprite2D" parent="Cost"]
+position = Vector2(48, -108)
+scale = Vector2(0.7, 0.7)
+texture = ExtResource("5_arkmu")
+
+[node name="SecondaryCost" type="Label" parent="Cost"]
+offset_left = 31.0
+offset_top = -120.0
+offset_right = 47.0
+offset_bottom = -97.0
+text = "1"
+metadata/_edit_use_anchors_ = true
+
+[node name="PrimaryResource" type="Sprite2D" parent="Cost"]
+position = Vector2(76, -108)
+scale = Vector2(0.5, 0.4)
+texture = ExtResource("6_jsaui")
+
+[node name="PrimaryCost" type="Label" parent="Cost"]
+offset_left = 62.0
+offset_top = -120.0
+offset_right = 75.0
+offset_bottom = -97.0
+text = "1"
+metadata/_edit_use_anchors_ = true
+
+[node name="CollisionArea" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CollisionArea"]
+shape = SubResource("RectangleShape2D_guy1y")

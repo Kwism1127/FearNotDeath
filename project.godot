@@ -11,14 +11,14 @@ config_version=5
 [application]
 
 config/name="FearNotDeath"
-run/main_scene="res://Scenes/UI Scenes/main_menu.tscn"
+run/main_scene="res://Old Files/Scenes/UI Scenes/main_menu.tscn"
 config/features=PackedStringArray("4.2", "Forward Plus")
 config/icon="res://icon.svg"
 
 [autoload]
 
-Recorder="*res://Scripts/Singletons/recorder.gd"
-PlayerInv="*res://Scripts/Singletons/player_inv.gd"
+Recorder="*res://Old Files/Scripts/Singletons/recorder.gd"
+PlayerInv="*res://Old Files/Scripts/Singletons/player_inv.gd"
 
 [display]
 
